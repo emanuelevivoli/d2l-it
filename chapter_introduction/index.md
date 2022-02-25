@@ -1,1688 +1,1689 @@
 # Introduction
 :label:`chap_introduction`
 
-Until recently, nearly every computer program 
-that you might interact with on an ordinary day
-was coded up as a rigid set of rules 
-specifying precisely how it should behave.
-Say that we wanted to write an application 
-to manage an e-commerce platform.
-After huddling around a whiteboard
-for a few hours to ponder the problem,
-we might settle on the broad strokes 
-of a working solution, for example:
-(i) users interact with the application through an interface
-running in a web browser or mobile application;
-(ii) our application interacts with a commercial-grade database engine
-to keep track of each user's state and maintain records
-of historical transactions; 
-and (iii) at the heart of our application,
-the *business logic* (you might say, the *brains*) of our application
-spells out in methodical a set of rules that map every 
-conceivable circumstance to the corresponding action
-that our program should take. 
+Fino a poco tempo fa, quasi ogni programma per computer 
+con il quale si sarebbe potuto interagire in un giorno qualsiasi
+era codificato come un rigido insieme di regole 
+che specificava precisamente come doveva comportarsi.
+Supponiamo volessimo scrivere un'applicazione 
+per gestire una piattaforma di e-commerce.
+Dopo esserci riuniti intorno ad una lavagna
+per qualche ora a riflettere sul problema,
+potremmo trovare, a grandi linee,
+una soluzione funzionante, per esempio:
+(i) gli utenti interagiscono con l'applicazione attraverso un'interfaccia
+che gira in un browser web o in un'applicazione mobile;
+(ii) la nostra applicazione interagisce con un database commerciale
+per tenere traccia dello stato di ogni utente e mantenere le registrazioni
+delle transazioni storiche; 
+e (iii) nel cuore della nostra applicazione,
+la *logica di business* (si potrebbe dire, il *cervello*) 
+definisce in maniera metodica un insieme di regole che mappano ogni 
+circostanza concepibile all'azione corrispondente
+che il nostro programma dovrebbe intraprendere.
 
-To build the brains of our application,
-we might enumerate all the common events
-that our program should handle.
-For example, whenever a customer clicks 
-to add an item to their shopping cart,
-our program should add an entry 
-to the shopping cart database table,
-associating that user's ID 
-with the requested product's ID.
-We might then attempt to step through 
-every possible corner case,
-testing the appropriateness of our rules
-and making any necessary modifications.
-What happens if a user 
-initiates a purchase with an empty cart? 
-While few developers ever get it 
-completely right the first time
-(it might take some test runs to work out the kinks),
-for the most part, we can write such programs 
-and confidently launch them 
-*before* ever seeing a real customer.
-Our ability to manually design automated systems
-that drive functioning products and systems, 
-often in novel situations,
-is a remarkable cognitive feat.
-And when you are able to devise solutions 
-that work $100\%$ of the time,
-you typically should not be 
-worrying about machine learning.
+Per costruire il cervello della nostra applicazione,
+potremmo enumerare tutti gli eventi comuni
+che il nostro programma dovrebbe gestire.
+Per esempio, ogni volta che un cliente clicca 
+per aggiungere un articolo al suo carrello,
+il nostro programma dovrebbe aggiungere una voce 
+alla tabella del database del carrello della spesa,
+associando l'ID dell'utente 
+con l'ID del prodotto richiesto.
+Potremmo poi tentare di passare attraverso 
+ogni possibile caso limite,
+testando l'adeguatezza delle nostre regole
+e apportando le modifiche necessarie.
+Cosa succede se un utente 
+inizia un acquisto con un carrello vuoto? 
+Anche se qualche sviluppatore ci riesce
+completamente bene la prima volta
+(potrebbero essere necessari alcuni test per risolvere i problemi),
+in generale, possiamo scrivere tali programmi 
+e lanciarli con fiducia 
+*prima* di vedere un vero cliente.
+La nostra capacità di progettare manualmente sistemi automatizzati
+che guidano prodotti e sistemi funzionanti, 
+spesso in situazioni nuove,
+è un'impresa cognitiva notevole.
+E quando si è in grado di concepire soluzioni 
+che funzionano il 100 % delle volte,
+in genere non ci si dovrebbe 
+preoccuparsi del machine learning.
 
-Fortunately for the growing community 
-of machine learning scientists,
-many tasks that we would like to automate
-do not bend so easily to human ingenuity.
-Imagine huddling around the whiteboard 
-with the smartest minds you know,
-but this time you are tackling 
-one of the following problems:
+Fortunatamente per la crescente comunità 
+di scienziati dell'apprendimento automatico,
+molti compiti che vorremmo automatizzare
+non si piegano così facilmente all'**ingegnosità umana**.
+Immaginate di riunirvi intorno alla lavagna 
+con le menti più intelligenti che conoscete,
+ma questa volta state affrontando 
+uno dei seguenti problemi:
 
-* Write a program that predicts tomorrow's weather given geographic information, satellite images, and a trailing window of past weather.
-* Write a program that takes in a factoid question, expressed in free-form text, and  answers it correctly.
-* Write a program that, given an image, identifies all of people depicted in it and draws outlines around each.
-* Write a program that presents users with products that they are likely to enjoy but unlikely, in the natural course of browsing, to encounter.
+* Scrivere un programma che preveda il meteo di domani, date informazioni geografiche, immagini satellitari e una finestra di tempo passata.
+* Scrivere un programma che prenda una domanda semplice, espressa in testo libero, e risponda correttamente.
+* Scrivere un programma che, data un'immagine, identifichi tutte le persone in essa raffigurate e ne disegni i contorni.
+* Scrivete un programma che presenti agli utenti dei prodotti che probabilmente gli piaceranno ma che difficilmente incontreranno nel corso naturale della navigazione.
 
-For these problems,
-even elite programmers would struggle
-to code up solutions from scratch.
-The reasons can vary. 
-Sometimes the program that we are looking for 
-follows a pattern that changes over time,
-so there is no fixed right answer! 
-In such cases, any successful solution 
-must adapt gracefully to a changing world. 
-At other times, the relationship (say between pixels,
-and abstract categories) may be too complicated,
-requiring thousands or millions of computations
-and following unknown principles. 
-As in image recognition, 
-the steps to perform a task
-often lie beyond our conscious understanding,
-even when our subconscious cognitive processes 
-can execute the task with ease. 
-
-
-*Machine learning* is the study of algorithms
-that can learn from experience.
-As a machine learning algorithm accumulates more experience,
-typically in the form of observational data 
-or interactions with an environment, 
-its performance improves.
-Contrast this with our deterministic e-commerce platform,
-which follows the same business logic,
-no matter how much experience accrues,
-until the developers themselves learn and decide
-that it is time to update the software.
-In this book, we will teach you 
-the fundamentals of machine learning,
-focusing in particular on *deep learning*, 
-a powerful set of techniques
-driving innovations in areas as diverse as computer vision,
-natural language processing, healthcare, and genomics.
-
-## A Motivating Example
-
-Before beginning writing, the authors of this book,
-like much of the work force, had to become caffeinated.
-We hopped in the car and started driving.
-Using an iPhone, Alex called out "Hey Siri",
-awakening the phone's voice recognition system.
-Then Mu commanded "directions to Blue Bottle coffee shop".
-The phone quickly displayed the transcription of his command.
-It also recognized that we were asking for directions
-and launched the Maps application (app)
-to fulfill our request.
-Once launched, the Maps app identified a number of routes.
-Next to each route, the phone displayed a predicted transit time.
-While we fabricated this story for pedagogical convenience,
-it demonstrates that in the span of just a few seconds,
-our everyday interactions with a smart phone
-can engage several machine learning models.
+Per questi problemi,
+anche i programmatori d'élite farebbero fatica
+a scrivere da zero delle soluzioni.
+Le ragioni possono variare. 
+A volte il programma che stiamo cercando 
+segue un modello che cambia nel tempo,
+quindi non c'è sempre una risposta giusta! 
+In questi casi, qualsiasi soluzione di successo 
+deve adattarsi graziosamente ad un mondo che cambia. 
+Altre volte, la relazione (ad esempio tra pixel,
+e categorie astratte) può essere troppo complicata,
+richiedendo migliaia o milioni di calcoli
+e seguendo principi sconosciuti. 
+Come nel riconoscimento delle immagini, 
+i passi per eseguire un compito
+spesso si trovano al di là della nostra comprensione coscente,
+anche quando i nostri processi cognitivi subconsci 
+possono eseguire il compito con facilità. 
 
 
-Imagine just writing a program to respond to a *wake word*
-such as "Alexa", "OK Google", and "Hey Siri".
-Try coding it up in a room by yourself
-with nothing but a computer and a code editor,
-as illustrated in :numref:`fig_wake_word`.
-How would you write such a program from first principles?
-Think about it... the problem is hard.
-Every second, the microphone will collect roughly 
-44000 samples.
-Each sample is a measurement of the amplitude of the sound wave.
-What rule could map reliably from a snippet of raw audio to confident predictions 
+*L'apprendimento automatico* (Machine Learning) è lo studio degli algoritmi
+che possono imparare dall'esperienza.
+Quanto più un algoritmo di apprendimento automatico accumula esperienza,
+tipicamente sotto forma di dati di osservazione 
+o interazioni con un ambiente, 
+tanto più le sue prestazioni migliorano.
+Questo è in contrasto con la nostra piattaforma deterministica di e-commerce
+che segue la stessa logica di business, 
+indipendentemente da quanta esperienza maturi, 
+finché gli sviluppatori stessi non decidono
+che è il momento di aggiornare il software.
+In questo libro vi insegneremo 
+i fondamenti dell'apprendimento automatico,
+concentrandosi in particolare sul *apprendimento profondo* (deep learning) , 
+un potente insieme di tecniche
+che guida le innovazioni in aree diverse come la visione artificiale (computer vision),
+l'elaborazione del linguaggio naturale (natural language processing), la sanità (healthcare) e la genomica (genomics).
+
+## Un esempio stimolante
+
+Prima di iniziare a scrivere, gli autori di questo libro,
+come gran parte della forza lavoro, dovevano diventare caffeinomani.
+Siamo saliti in macchina e abbiamo iniziato a guidare.
+Usando un iPhone, Alex ha chiamato "Hey Siri",
+risvegliando il sistema di riconoscimento vocale del telefono.
+Poi Mu ha detto "indicazioni per la caffetteria Blue Bottle".
+Il telefono ha mostrato rapidamente la trascrizione del suo comando.
+Ha anche riconosciuto che stavamo chiedendo indicazioni
+e ha lanciato l'applicazione Maps
+per soddisfare la nostra richiesta.
+Una volta lanciata, l'applicazione Mappe ha identificato una serie di percorsi.
+Accanto ad ogni percorso, il telefono ha visualizzato un tempo di percorrenza previsto.
+Anche se abbiamo inventato questa storia per comodità pedagogica,
+ciò dimostra che nell'arco di pochi secondi,
+le nostre interazioni quotidiane con uno smartphone
+possono coinvolgere diversi modelli di apprendimento automatico.
+
+
+Immaginate di scrivere un programma che risponda ad una *parola chiave*
+come "Alexa", "OK Google" e "Hey Siri".
+Provate a programmarlo in una stanza da soli
+con nient'altro che un computer e un editor di codice,
+come illustrato in :numref:`fig_wake_word`.
+Come fareste a scrivere un programma del genere partendo dai zero?
+Pensateci... il problema è difficile.
+Ogni secondo, il microfono raccoglierà circa 
+44000 campioni.
+Ogni campione è una misura dell'ampiezza dell'onda sonora.
+Quale regola potrebbe mappare in modo affidabile un frammento di audio grezzo in previsioni sicure 
 $\{\text{yes}, \text{no}\}$
-on whether the snippet contains the wake word?
-If you are stuck, do not worry.
-We do not know how to write such a program from scratch either.
-That is why we use machine learning.
+sul fatto che il frammento contenga o meno la "parola chiave"?
+Se siete bloccati, non preoccupatevi.
+Neanche noi sappiamo come scrivere un programma del genere da zero.
+Ecco perché usiamo il machine learning.
 
 ![Identify a wake word.](../img/wake-word.svg)
 :label:`fig_wake_word`
 
 
-Here is the trick.
-Often, even when we do not know how to tell a computer
-explicitly how to map from inputs to outputs,
-we are nonetheless capable of performing the cognitive feat ourselves.
-In other words, even if you do not know
-how to program a computer to recognize the word "Alexa",
-you yourself are able to recognize it.
-Armed with this ability, we can collect a huge *dataset*
-containing examples of audio 
-and label those that do
-and that do not contain the wake word.
-In the machine learning approach, 
-we do not attempt to design a system
-*explicitly* to recognize wake words.
-Instead, we define a flexible program
-whose behavior is determined by a number of *parameters*.
-Then we use the dataset to determine the best possible set of parameters, 
-those that improve the performance of our program
-with respect to some measure of performance on the task of interest.
+Ecco il trucco.
+Spesso, anche quando non sappiamo come dire ad un computer
+esplicitamente come mappare dagli input in output,
+siamo comunque in grado di eseguire noi stessi l'impresa cognitiva.
+In altre parole, anche se non si sa
+come programmare un computer per riconoscere la parola "Alexa",
+voi stessi siete in grado di riconoscerla.
+Armati di questa capacità, possiamo raccogliere un enorme *dataset*
+contenente esempi di audio 
+ed etichettare quelli che contengono
+e che non contengono la "parola chiave".
+Nell'approccio di apprendimento automatico, 
+non cerchiamo di progettare un sistema
+*in modo esplicito* per riconoscere le parole di veglia.
+Piuttosto, definiamo un programma flessibile
+il cui comportamento è determinato da una serie di *parametri*.
+Poi usiamo il set di dati per determinare il miglior set di parametri possibile, 
+cioè quelli che migliorano le prestazioni del nostro programma
+rispetto a qualche misura di performance sul compito di interesse.
 
-You can think of the parameters as knobs that we can turn,
-manipulating the behavior of the program.
-Fixing the parameters, we call the program a *model*.
-The set of all distinct programs (input-output mappings)
-that we can produce just by manipulating the parameters
-is called a *family* of models.
-And the meta-program that uses our dataset
-to choose the parameters is called a *learning algorithm*.
+Potete pensare ai parametri come a delle manopole che possiamo girare,
+manipolando il comportamento del programma.
+Fissando i parametri, chiamiamo il programma un *modello*.
+L'insieme di tutti i programmi distinti (mappature input-output)
+che possiamo produrre solo manipolando i parametri
+si chiama una *famiglia* di modelli.
+E il metaprogramma che usa il nostro set di dati
+per scegliere i parametri si chiama *algoritmo di apprendimento*.
 
-Before we can go ahead and engage the learning algorithm,
-we have to define the problem precisely,
-pinning down the exact nature of the inputs and outputs,
-and choosing an appropriate model family.
-In this case, 
-our model receives a snippet of audio as *input*,
-and the model 
-generates a selection among 
-$\{\text{yes}, \text{no}\}$ as *output*.
-If all goes according to plan 
-the model's guesses will
-typically be correct as to 
-whether the snippet contains the wake word.
+Prima di andare avanti e impegnare l'algoritmo di apprendimento,
+dobbiamo definire il problema con precisione,
+stabilendo l'esatta natura degli input e degli output,
+e scegliere una famiglia di modelli appropriata.
+In questo caso, 
+il nostro modello riceve un frammento di audio come *input*,
+e il modello 
+genera una selezione tra 
+come *output*.
+Se tutto va secondo i piani 
+le ipotesi del modello saranno
+tipicamente corrette per quanto riguarda 
+se il frammento contiene la parola di scia.
 
-If we choose the right family of models,
-there should exist one setting of the knobs
-such that the model fires "yes" every time it hears the word "Alexa".
-Because the exact choice of the wake word is arbitrary,
-we will probably need a model family sufficiently rich that,
-via another setting of the knobs, it could fire "yes"
-only upon hearing the word "Apricot".
-We expect that the same model family should be suitable
-for "Alexa" recognition and "Apricot" recognition
-because they seem, intuitively, to be similar tasks.
-However, we might need a different family of models entirely
-if we want to deal with fundamentally different inputs or outputs,
-say if we wanted to map from images to captions,
-or from English sentences to Chinese sentences.
+Se scegliamo la giusta famiglia di modelli,
+dovrebbe esistere un'impostazione delle manopole
+tale che il modello spari "sì" ogni volta che sente la parola "Alexa".
+Poiché la scelta esatta della parola di sveglia è arbitraria,
+avremo probabilmente bisogno di una famiglia di modelli sufficientemente ricca che,
+attraverso un'altra impostazione delle manopole, potrebbe sparare "sì"
+solo dopo aver sentito la parola "Apricot".
+Ci aspettiamo che la stessa famiglia di modelli sia adatta
+per il riconoscimento "Alexa" e il riconoscimento "Apricot
+perché sembrano, intuitivamente, essere compiti simili.
+Tuttavia, potremmo aver bisogno di una famiglia di modelli completamente diversa
+se vogliamo trattare con input o output fondamentalmente diversi,
+ad esempio se volessimo mappare da immagini a didascalie,
+o da frasi inglesi a frasi cinesi.
 
-As you might guess, if we just set all of the knobs randomly,
-it is unlikely that our model will recognize "Alexa",
-"Apricot", or any other English word.
-In machine learning, 
-the *learning* is the process
-by which we discover the right setting of the knobs
-coercing the desired behavior from our model.
-In other words,
-we *train* our model with data.
-As shown in :numref:`fig_ml_loop`, the training process usually looks like the following:
+Come si può intuire, se impostiamo tutte le manopole in modo casuale,
+è improbabile che il nostro modello riconosca "Alexa",
+"Apricot", o qualsiasi altra parola inglese.
+Nell'apprendimento automatico, 
+l'*apprendimento* è il processo
+con cui scopriamo la giusta impostazione delle manopole
+costringendo il comportamento desiderato dal nostro modello.
+In altre parole,
+noi *addestriamo* il nostro modello con i dati.
+Come mostrato in :numref:`fig_ml_loop`, il processo di allenamento di solito assomiglia al seguente:
 
-1. Start off with a randomly initialized model that cannot do anything useful.
-1. Grab some of your data (e.g., audio snippets and corresponding $\{\text{yes}, \text{no}\}$ labels).
-1. Tweak the knobs so the model sucks less with respect to those examples.
-1. Repeat Step 2 and 3 until the model is awesome.
+1. Iniziare con un modello inizializzato a caso che non può fare nulla di utile.
+2. Prendete alcuni dei vostri dati (ad esempio, frammenti audio e le corrispondenti etichette ${testo{sì}, \testo{no}}$).
+3. Modificate le manopole in modo che il modello faccia meno schifo rispetto a quegli esempi.
+4. Ripetere i passi 2 e 3 fino a quando il modello è fantastico.
 
 ![A typical training process.](../img/ml-loop.svg)
 :label:`fig_ml_loop`
 
-To summarize, rather than code up a wake word recognizer,
-we code up a program that can *learn* to recognize wake words,
-if we present it with a large labeled dataset.
-You can think of this act of determining a program's behavior
-by presenting it with a dataset as *programming with data*.
-That is to say,
-we can "program" a cat detector by providing our machine learning system
-with many examples of cats and dogs.
-This way the detector will eventually learn to emit a very large positive number if it is a cat, a very large negative number if it is a dog,
-and something closer to zero if it is not sure,
-and this barely scratches the surface of what machine learning can do.
-Deep learning,
-which we will explain in greater detail later,
-is just one among many popular methods
-for solving machine learning problems.
+Per riassumere, piuttosto che codificare un riconoscitore di parole di scia,
+mettiamo in codice un programma che può *imparare* a riconoscere le parole di veglia,
+se gli presentiamo un grande set di dati etichettati.
+Si può pensare a questo atto di determinare il comportamento di un programma
+presentandogli un set di dati come *programmazione con i dati*.
+Vale a dire,
+possiamo "programmare" un rilevatore di gatti fornendo al nostro sistema di apprendimento automatico
+con molti esempi di cani e gatti.
+In questo modo il rilevatore alla fine imparerà ad emettere un numero positivo molto grande se si tratta di un gatto, un numero negativo molto grande se si tratta di un cane,
+e qualcosa di più vicino allo zero se non è sicuro,
+e questo graffia appena la superficie di ciò che l'apprendimento automatico può fare.
+Apprendimento profondo,
+che spiegheremo in dettaglio più avanti,
+è solo uno dei molti metodi popolari
+per risolvere problemi di apprendimento automatico.
 
-## Key Components
+## Componenti chiave
 
-In our wake word example, we described a dataset
-consisting of audio snippets and binary labels, 
-and we
-gave a hand-wavy sense of how we might train
-a model to approximate a mapping from snippets to classifications.
-This sort of problem, 
-where we try to predict a designated unknown label
-based on known inputs
-given a dataset consisting of examples
-for which the labels are known, 
-is called *supervised learning*.
-This is just one among many kinds of machine learning problems.
-Later we will take a deep dive into different machine learning problems.
-First, we would like to shed more light on some core components
-that will follow us around, no matter what kind of machine learning problem we take on:
+Nel nostro esempio di parole della scia, abbiamo descritto un set di dati
+composto da frammenti audio ed etichette binarie, 
+e abbiamo
+abbiamo dato un'idea di come potremmo addestrare
+un modello per approssimare una mappatura dagli snippet alle classificazioni.
+Questo tipo di problema, 
+in cui cerchiamo di predire un'etichetta sconosciuta designata
+sulla base di input noti
+dato un set di dati composto da esempi
+per i quali le etichette sono note, 
+è chiamato *apprendimento supervisionato*.
+Questo è solo uno dei tanti tipi di problemi di apprendimento automatico.
+Più avanti faremo un'immersione profonda in diversi problemi di apprendimento automatico.
+Prima, vorremmo fare più luce su alcuni componenti fondamentali
+che ci seguiranno, indipendentemente dal tipo di problema di apprendimento automatico che affrontiamo:
 
-1. The *data* that we can learn from.
-1. A *model* of how to transform the data.
-1. An *objective function* that quantifies how well (or badly) the model is doing.
-1. An *algorithm* to adjust the model's parameters to optimize the objective function.
+1. I *dati* da cui possiamo imparare.
+1. Un *modello* di come trasformare i dati.
+1. Una *funzione oggettiva* che quantifica quanto bene (o male) sta facendo il modello.
+1. Un *algoritmo* per regolare i parametri del modello per ottimizzare la funzione obiettivo.
 
-### Data
+### Dati
 
-It might go without saying that you cannot do data science without data.
-We could lose hundreds of pages pondering what precisely constitutes data,
-but for now, we will err on the practical side
-and focus on the key properties to be concerned with.
-Generally, we are concerned with a collection of examples.
-In order to work with data usefully, 
-we typically
-need to come up with a suitable numerical representation.
-Each *example* (or *data point*, *data instance*, *sample*) typically consists of a set
-of attributes called *features* (or *covariates*),
-from which the model must make its predictions.
-In the supervised learning problems above,
-the thing to predict
-is a special attribute 
-that is designated as
-the *label* (or *target*).
+Non c'è bisogno di dire che non si può fare scienza dei dati senza dati.
+Potremmo perdere centinaia di pagine a riflettere su ciò che costituisce precisamente i dati,
+ma per ora, sbaglieremo sul lato pratico
+e ci concentreremo sulle proprietà chiave di cui preoccuparsi.
+In generale, ci preoccupiamo di una collezione di esempi.
+Per lavorare utilmente con i dati, 
+tipicamente
+bisogno di trovare una rappresentazione numerica adatta.
+Ogni *esempio* (o *punto dati*, *istanza dati*, *campione*) consiste tipicamente in un insieme
+di attributi chiamati *caratteristiche* (o *covariate*),
+da cui il modello deve fare le sue previsioni.
+Nei problemi di apprendimento supervisionato di cui sopra,
+la cosa da predire
+è un attributo speciale 
+che è designato come
+la *etichetta* (o *obiettivo*).
 
 
-If we were working with image data,
-each individual photograph might constitute an example,
-each represented by an ordered list of numerical values
-corresponding to the brightness of each pixel.
-A $200\times 200$ color photograph would consist of $200\times200\times3=120000$
-numerical values, corresponding to the brightness
-of the red, green, and blue channels for each spatial location.
-In another traditional task, we might try to predict
-whether or not a patient will survive,
-given a standard set of features such as
-age, vital signs, and diagnoses.
+Se stessimo lavorando con dati di immagini,
+ogni singola fotografia potrebbe costituire un esempio,
+ciascuna rappresentata da una lista ordinata di valori numerici
+corrispondenti alla luminosità di ogni pixel.
+Una fotografia a colori da 200$ per 200$ consisterebbe in 200$ per 200$ per 3$ per 120000$
+valori numerici, corrispondenti alla luminosità
+dei canali rosso, verde e blu per ogni posizione spaziale.
+In un altro compito tradizionale, potremmo cercare di prevedere
+se un paziente sopravviverà o meno,
+dato un insieme standard di caratteristiche come
+età, segni vitali e diagnosi.
 
-When every example is characterized by the same number of numerical values,
-we say that the data consists of fixed-length vectors
-and we describe the constant length of the vectors
-as the *dimensionality* of the data.
-As you might imagine, fixed-length can be a convenient property.
-If we wanted to train a model to recognize cancer in microscopy images,
-fixed-length inputs mean we have one less thing to worry about.
+Quando ogni esempio è caratterizzato dallo stesso numero di valori numerici,
+diciamo che i dati consistono in vettori di lunghezza fissa
+e descriviamo la lunghezza costante dei vettori
+come la *dimensionalità* dei dati.
+Come potete immaginare, la lunghezza fissa può essere una proprietà conveniente.
+Se volessimo addestrare un modello per riconoscere il cancro nelle immagini di microscopia,
+gli input a lunghezza fissa significano che abbiamo una cosa in meno di cui preoccuparci.
 
-However, not all data can easily be represented as 
-*fixed-length* vectors.
-While we might expect microscope images to come from standard equipment,
-we cannot expect images mined from the Internet
-to all show up with the same resolution or shape.
-For images, we might consider cropping them all to a standard size,
-but that strategy only gets us so far.
-We risk losing information in the cropped out portions.
-Moreover, text data resists fixed-length representations even more stubbornly.
-Consider the customer reviews left on e-commerce sites
-such as Amazon, IMDB, and TripAdvisor.
-Some are short: "it stinks!". 
-Others ramble for pages.
-One major advantage of deep learning over traditional methods
-is the comparative grace with which modern models
-can handle *varying-length* data.
+Tuttavia, non tutti i dati possono essere facilmente rappresentati come 
+*vettori di lunghezza fissa*.
+Mentre potremmo aspettarci che le immagini del microscopio provengano da apparecchiature standard,
+non possiamo aspettarci che le immagini estratte da Internet
+si presentino tutte con la stessa risoluzione o forma.
+Per le immagini, potremmo considerare di ritagliarle tutte ad una dimensione standard,
+ma questa strategia ci porta solo fino a un certo punto.
+Rischiamo di perdere informazioni nelle porzioni ritagliate.
+Inoltre, i dati di testo resistono ancora più ostinatamente alle rappresentazioni a lunghezza fissa.
+Consideriamo le recensioni dei clienti lasciate sui siti di e-commerce
+come Amazon, IMDB e TripAdvisor.
+Alcune sono brevi: "fa schifo! 
+Altre divagano per pagine.
+Uno dei principali vantaggi dell'apprendimento profondo rispetto ai metodi tradizionali
+è la grazia comparativa con cui i modelli moderni
+possono gestire dati di lunghezza variabile.
 
-Generally, the more data we have, the easier our job becomes.
-When we have more data, we can train more powerful models
-and rely less heavily on pre-conceived assumptions.
-The regime change from (comparatively) small to big data
-is a major contributor to the success of modern deep learning.
-To drive the point home, many of the most exciting models in deep learning do not work without large datasets.
-Some others work in the small data regime,
-but are no better than traditional approaches.
+In generale, più dati abbiamo, più facile diventa il nostro lavoro.
+Quando abbiamo più dati, possiamo addestrare modelli più potenti
+e fare meno affidamento su ipotesi preconcette.
+Il cambio di regime dai (relativamente) piccoli ai grandi dati
+è uno dei principali fattori che contribuiscono al successo del moderno deep learning.
+Per portare a casa il punto, molti dei modelli più eccitanti nell'apprendimento profondo non funzionano senza grandi set di dati.
+Alcuni altri funzionano nel regime dei piccoli dati,
+ma non sono migliori degli approcci tradizionali.
 
-Finally, it is not enough to have lots of data and to process it cleverly.
-We need the *right* data. 
-If the data is full of mistakes,
-or if the chosen features are not predictive
-of the target quantity of interest, 
-learning is going to fail.
-The situation is captured well by the cliché:
+Infine, non è sufficiente avere molti dati ed elaborarli in modo intelligente.
+Abbiamo bisogno dei dati *giusti*. 
+Se i dati sono pieni di errori,
+o se le caratteristiche scelte non sono predittive
+della quantità target di interesse, 
+l'apprendimento fallirà.
+La situazione è catturata bene dal cliché:
 *garbage in, garbage out*.
-Moreover, poor predictive performance is not the only potential consequence.
-In sensitive applications of machine learning,
-like predictive policing, resume screening, and risk models used for lending,
-we must be especially alert to the consequences of garbage data.
-One common failure mode occurs in datasets where some groups of people
-are unrepresented in the training data.
-Imagine applying a skin cancer recognition system in the wild
-that had never seen black skin before.
-Failure can also occur when the data
-does not merely under-represent some groups
-but reflects societal prejudices.
-For example, 
-if past hiring decisions are used to train a predictive model
-that will be used to screen resumes,
-then machine learning models could inadvertently
-capture and automate historical injustices.
-Note that this can all happen without the data scientist
-actively conspiring, or even being aware.
+Inoltre, la scarsa performance predittiva non è l'unica conseguenza potenziale.
+In applicazioni sensibili di apprendimento automatico,
+come la polizia predittiva, lo screening dei curriculum, e i modelli di rischio usati per i prestiti,
+dobbiamo essere particolarmente attenti alle conseguenze dei dati spazzatura.
+Una modalità comune di fallimento si verifica in serie di dati in cui alcuni gruppi di persone
+non sono rappresentati nei dati di formazione.
+Immaginate di applicare un sistema di riconoscimento del cancro della pelle in natura
+che non ha mai visto pelle nera prima.
+Il fallimento può verificarsi anche quando i dati
+non si limitano a sottorappresentare alcuni gruppi
+ma riflettono i pregiudizi della società.
+Per esempio, 
+se le decisioni di assunzione passate vengono utilizzate per addestrare un modello predittivo
+che sarà usato per vagliare i curriculum,
+allora i modelli di apprendimento automatico potrebbero inavvertitamente
+catturare e automatizzare le ingiustizie storiche.
+Si noti che tutto questo può accadere senza che lo scienziato dei dati
+senza che lo scienziato dei dati cospiri attivamente o sia consapevole.
 
 
-### Models
+Modelli ###
 
-Most machine learning involves transforming the data in some sense.
-We might want to build a system that ingests photos and predicts smiley-ness.
-Alternatively,
-we might want to ingest a set of sensor readings
-and predict how normal vs. anomalous the readings are.
-By *model*, we denote the computational machinery for ingesting data
-of one type, 
-and spitting out predictions of a possibly different type.
-In particular, we are interested in statistical models
-that can be estimated from data.
-While simple models are perfectly capable of addressing
-appropriately simple problems,
-the problems
-that we focus on in this book stretch the limits of classical methods.
-Deep learning is differentiated from classical approaches
-principally by the set of powerful models that it focuses on.
-These models consist of many successive transformations of the data
-that are chained together top to bottom, thus the name *deep learning*.
-On our way to discussing deep models,
-we will also discuss some more traditional methods.
+La maggior parte del machine learning implica la trasformazione dei dati in un certo senso.
+Potremmo voler costruire un sistema che ingerisce le foto e predice il sorriso.
+In alternativa,
+potremmo voler ingerire una serie di letture di sensori
+e prevedere quanto siano normali o anomale le letture.
+Con *modello*, indichiamo il macchinario computazionale per ingerire dati
+di un tipo, 
+e sputare fuori previsioni di un tipo possibilmente diverso.
+In particolare, siamo interessati a modelli statistici
+che possono essere stimati dai dati.
+Mentre i modelli semplici sono perfettamente in grado di affrontare
+problemi adeguatamente semplici,
+i problemi
+su cui ci concentriamo in questo libro estendono i limiti dei metodi classici.
+L'apprendimento profondo si differenzia dagli approcci classici
+principalmente dall'insieme di potenti modelli su cui si concentra.
+Questi modelli consistono in molte trasformazioni successive dei dati
+che sono concatenate da cima a fondo, da cui il nome *apprendimento profondo*.
+Nel nostro modo di discutere i modelli profondi,
+discuteremo anche alcuni metodi più tradizionali.
 
-### Objective Functions
+Funzioni obiettivo ###
 
-Earlier, we introduced machine learning as learning from experience.
-By *learning* here,
-we mean improving at some task over time.
-But who is to say what constitutes an improvement?
-You might imagine that we could propose to update our model,
-and some people might disagree on whether the proposed update
-constituted an improvement or a decline.
+Prima abbiamo introdotto l'apprendimento automatico come apprendimento dall'esperienza.
+Con *apprendimento* qui,
+intendiamo migliorare in qualche compito nel tempo.
+Ma chi può dire cosa costituisce un miglioramento?
+Potreste immaginare che potremmo proporre di aggiornare il nostro modello,
+e alcune persone potrebbero essere in disaccordo sul fatto che l'aggiornamento proposto
+costituisca un miglioramento o un declino.
 
-In order to develop a formal mathematical system of learning machines,
-we need to have formal measures of how good (or bad) our models are.
-In machine learning, and optimization more generally,
-we call these *objective functions*.
-By convention, we usually define objective functions
-so that lower is better.
-This is merely a convention. 
-You can take any function
-for which higher is better, and turn it into a new function
-that is qualitatively identical but for which lower is better
-by flipping the sign.
-Because lower is better, these functions are sometimes called
-*loss functions*.
+Per sviluppare un sistema matematico formale di apprendimento delle macchine,
+dobbiamo avere misure formali di quanto siano buoni (o cattivi) i nostri modelli.
+Nell'apprendimento automatico, e nell'ottimizzazione più in generale,
+chiamiamo queste *funzioni obiettivo*.
+Per convenzione, di solito definiamo le funzioni obiettivo
+in modo che più basso è meglio.
+Questa è semplicemente una convenzione. 
+Si può prendere qualsiasi funzione
+per la quale il più alto è migliore, e trasformarla in una nuova funzione
+che è qualitativamente identica, ma per la quale è migliore quella inferiore
+invertendo il segno.
+Poiché minore è migliore, queste funzioni sono talvolta chiamate
+*funzioni di perdita*.
 
-When trying to predict numerical values,
-the most common loss function is *squared error*,
-i.e., the square of the difference between the prediction and the ground-truth.
-For classification, the most common objective is to minimize error rate,
-i.e., the fraction of examples on which
-our predictions disagree with the ground truth.
-Some objectives (e.g., squared error) are easy to optimize.
-Others (e.g., error rate) are difficult to optimize directly,
-owing to non-differentiability or other complications.
-In these cases, it is common to optimize a *surrogate objective*.
+Quando si cerca di prevedere valori numerici,
+la funzione di perdita più comune è *l'errore quadratico*,
+cioè il quadrato della differenza tra la predizione e la verità.
+Per la classificazione, l'obiettivo più comune è quello di minimizzare il tasso di errore,
+cioè la frazione di esempi su cui le nostre
+le nostre previsioni sono in disaccordo con la verità di base.
+Alcuni obiettivi (ad esempio, l'errore al quadrato) sono facili da ottimizzare.
+Altri (ad esempio, il tasso di errore) sono difficili da ottimizzare direttamente,
+a causa della non differenziabilità o altre complicazioni.
+In questi casi, è comune ottimizzare un *obiettivo surrogato*.
 
-Typically, the loss function is defined
-with respect to the model's parameters
-and depends upon the dataset.
-We learn
-the best values of our model's parameters
-by minimizing the loss incurred on a set
-consisting of some number of examples collected for training.
-However, doing well on the training data
-does not guarantee that we will do well on unseen data.
-So we will typically want to split the available data into two partitions:
-the *training dataset* (or *training set*, for fitting model parameters)
-and the *test dataset* (or *test set*, which is held out for evaluation),
-reporting how the model performs on both of them.
-You could think of training performance as being like
-a student's scores on practice exams
-used to prepare for some real final exam.
-Even if the results are encouraging,
-that does not guarantee success on the final exam.
-In other words,
-the test performance can deviate significantly from the training performance. 
-When a model performs well on the training set
-but fails to generalize to unseen data,
-we say that it is *overfitting*.
-In real-life terms, this is like flunking the real exam
-despite doing well on practice exams.
-
-
-### Optimization Algorithms
-
-Once we have got some data source and representation,
-a model, and a well-defined objective function,
-we need an algorithm capable of searching
-for the best possible parameters for minimizing the loss function.
-Popular optimization algorithms for deep learning
-are based on an approach called *gradient descent*.
-In short, at each step, this method 
-checks to see, for each parameter,
-which way the training set loss would move
-if you perturbed that parameter just a small amount.
-It then updates
-the parameter in the direction that may reduce the loss.
-
-## Kinds of Machine Learning Problems
-
-The wake word problem in our motivating example
-is just one among
-many problems that machine learning can tackle.
-To motivate the reader further
-and provide us with some common language when we talk about more problems throughout the book,
-in the following we 
-list a sampling of machine learning problems.
-We will constantly refer to
-our aforementioned concepts 
-such as data, models, and training techniques.
-
-### Supervised Learning
-
-Supervised learning addresses the task of
-predicting labels given input features.
-Each feature--label pair is called an example.
-Sometimes, when the context is clear, we may use the term *examples*
-to refer to a collection of inputs,
-even when the corresponding labels are unknown.
-Our goal is to produce a model
-that maps any input to a label prediction.
+Tipicamente, la funzione di perdita è definita
+rispetto ai parametri del modello
+e dipende dal set di dati.
+Impariamo
+i migliori valori dei parametri del nostro modello
+minimizzando la perdita subita su un set
+costituito da un certo numero di esempi raccolti per l'addestramento.
+Tuttavia, fare bene sui dati di addestramento
+non garantisce che faremo bene anche sui dati non visti.
+Quindi tipicamente vogliamo dividere i dati disponibili in due partizioni:
+il *set di dati di addestramento* (o *set di addestramento*, per l'adattamento dei parametri del modello)
+e l'*insieme di dati di prova* (o *insieme di prova*, che è tenuto fuori per la valutazione),
+riportando come il modello si comporta su entrambi.
+Si potrebbe pensare alla performance di allenamento come a
+i punteggi di uno studente agli esami di pratica
+usati per preparare un vero esame finale.
+Anche se i risultati sono incoraggianti,
+questo non garantisce il successo nell'esame finale.
+In altre parole,
+la performance del test può deviare significativamente dalla performance dell'allenamento. 
+Quando un modello si comporta bene sul set di allenamento
+ma non riesce a generalizzare ai dati non visti,
+diciamo che è *overfitting*.
+In termini di vita reale, questo è come essere bocciati all'esame reale
+nonostante sia andato bene negli esami di pratica.
 
 
-To ground this description in a concrete example,
-if we were working in healthcare,
-then we might want to predict whether or not
-a patient would have a heart attack.
-This observation, "heart attack" or "no heart attack",
-would be our label.
-The input features might be vital signs
-such as heart rate, diastolic blood pressure, 
-and systolic blood pressure.
+### Algoritmi di ottimizzazione
 
-The supervision comes into play because for choosing the parameters, we (the supervisors) provide the model with a dataset
-consisting of labeled examples,
-where each example is matched with the ground-truth label.
-In probabilistic terms, we typically are interested in estimating
-the conditional probability of a label given input features.
-While it is just one among several paradigms within machine learning,
-supervised learning accounts for the majority of successful
-applications of machine learning in industry.
-Partly, that is because many important tasks
-can be described crisply as estimating the probability
-of something unknown given a particular set of available data:
+Una volta che abbiamo una fonte di dati e una rappresentazione,
+un modello e una funzione obiettivo ben definita,
+abbiamo bisogno di un algoritmo capace di cercare
+i migliori parametri possibili per minimizzare la funzione di perdita.
+Gli algoritmi di ottimizzazione popolari per l'apprendimento profondo
+si basano su un approccio chiamato *gradient descent*.
+In breve, ad ogni passo, questo metodo 
+controlla per vedere, per ogni parametro,
+da che parte si muoverebbe la perdita del set di allenamento
+se si perturba quel parametro solo di poco.
+Quindi aggiorna
+il parametro nella direzione che potrebbe ridurre la perdita.
 
-* Predict cancer vs. not cancer, given a computer tomography image.
-* Predict the correct translation in French, given a sentence in English.
-* Predict the price of a stock next month based on this month's financial reporting data.
+## Tipi di problemi di apprendimento automatico
 
-Even with the simple description
-"predicting labels given input features"
-supervised learning can take a great many forms
-and require a great many modeling decisions,
-depending on (among other considerations) the type, size,
-and the number of inputs and outputs.
-For example, we use different models to process sequences of arbitrary lengths
-and for processing fixed-length vector representations.
-We will visit many of these problems in depth
-throughout this book.
+Il problema della parola scia nel nostro esempio motivante
+è solo uno dei tanti problemi
+problemi che l'apprendimento automatico può affrontare.
+Per motivare ulteriormente il lettore
+e fornirci un linguaggio comune quando parleremo di altri problemi nel corso del libro,
+di seguito noi 
+elenchiamo un campione di problemi di apprendimento automatico.
+Faremo costantemente riferimento a
+ai nostri concetti sopra menzionati 
+come dati, modelli e tecniche di addestramento.
 
-Informally, the learning process looks something like the following.
-First, grab a big collection of examples for which the features are known
-and select from them a random subset,
-acquiring the ground-truth labels for each.
-Sometimes these labels might be available data that have already been collected
-(e.g., did a patient die within the following year?)
-and other times we might need to employ human annotators to label the data,
-(e.g., assigning images to categories).
-Together, these inputs and corresponding labels comprise the training set.
-We feed the training dataset into a supervised learning algorithm,
-a function that takes as input a dataset
-and outputs another function: the learned model.
-Finally, we can feed previously unseen inputs to the learned model,
-using its outputs as predictions of the corresponding label.
-The full process is drawn in :numref:`fig_supervised_learning`.
+### Apprendimento supervisionato
 
-![Supervised learning.](../img/supervised-learning.svg)
+L'apprendimento supervisionato affronta il compito di
+predire le etichette date le caratteristiche di input.
+Ogni coppia caratteristica-etichetta è chiamata esempio.
+A volte, quando il contesto è chiaro, possiamo usare il termine *esempi*
+per riferirsi ad una collezione di input,
+anche quando le etichette corrispondenti sono sconosciute.
+Il nostro obiettivo è produrre un modello
+che mappi qualsiasi input a una predizione di etichetta.
+
+
+Per radicare questa descrizione in un esempio concreto,
+se stessimo lavorando nel settore sanitario,
+potremmo voler predire se un paziente
+un paziente avrebbe un attacco di cuore.
+Questa osservazione, "attacco di cuore" o "nessun attacco di cuore",
+sarebbe la nostra etichetta.
+Le caratteristiche di input potrebbero essere i segni vitali
+come la frequenza cardiaca, la pressione sanguigna diastolica 
+e la pressione sanguigna sistolica.
+
+La supervisione entra in gioco perché per scegliere i parametri, noi (i supervisori) forniamo al modello un dataset
+composto da esempi etichettati,
+dove ogni esempio è abbinato all'etichetta di verità.
+In termini probabilistici, siamo tipicamente interessati a stimare
+la probabilità condizionata di un'etichetta date le caratteristiche di input.
+Sebbene sia solo uno dei tanti paradigmi dell'apprendimento automatico,
+l'apprendimento supervisionato rappresenta la maggior parte delle applicazioni
+applicazioni di successo dell'apprendimento automatico nell'industria.
+In parte, questo è dovuto al fatto che molti compiti importanti
+possono essere descritti in modo chiaro come la stima della probabilità
+di qualcosa di sconosciuto dato un particolare insieme di dati disponibili:
+
+* Predire il cancro vs. non cancro, data un'immagine di tomografia computerizzata.
+* Prevedere la traduzione corretta in francese, data una frase in inglese.
+* Prevedere il prezzo di un'azione il mese prossimo sulla base dei dati finanziari di questo mese.
+
+Anche con la semplice descrizione
+"predire le etichette date le caratteristiche di input"
+l'apprendimento supervisionato può assumere molte forme
+e richiedere un gran numero di decisioni di modellazione,
+a seconda (tra le altre considerazioni) del tipo, della dimensione,
+e il numero di input e output.
+Per esempio, usiamo diversi modelli per elaborare sequenze di lunghezza arbitraria
+e per elaborare rappresentazioni vettoriali di lunghezza fissa.
+Visiteremo molti di questi problemi in profondità
+nel corso di questo libro.
+
+Informalmente, il processo di apprendimento assomiglia a quanto segue.
+Per prima cosa, prendiamo una grande collezione di esempi per i quali le caratteristiche sono note
+e selezioniamo da essi un sottoinsieme casuale,
+acquisendo le etichette di verità per ognuno di essi.
+A volte queste etichette potrebbero essere dati disponibili che sono già stati raccolti
+(ad esempio, un paziente è morto entro l'anno successivo?)
+e altre volte potremmo aver bisogno di impiegare annotatori umani per etichettare i dati,
+(ad esempio, assegnando le immagini alle categorie).
+Insieme, questi input e le etichette corrispondenti costituiscono il set di allenamento.
+Alimentiamo il set di dati di allenamento in un algoritmo di apprendimento supervisionato,
+una funzione che prende come input un set di dati
+e produce un'altra funzione: il modello appreso.
+Infine, possiamo dare in pasto al modello appreso degli input non visti in precedenza,
+usando i suoi output come previsioni dell'etichetta corrispondente.
+Il processo completo è disegnato in :numref:`fig_supervised_learning`.
+
+apprendimento supervisionato](../img/supervised-learning.svg)
 :label:`fig_supervised_learning`
 
-#### Regression
+#### Regressione
 
-Perhaps the simplest supervised learning task
-to wrap your head around is *regression*.
-Consider, for example, a set of data harvested
-from a database of home sales.
-We might construct a table, 
-where each row corresponds to a different house,
-and each column corresponds to some relevant attribute,
-such as the square footage of a house, 
-the number of bedrooms, the number of bathrooms, and the number of minutes (walking) to the center of town.
-In this dataset, each example would be a specific house,
-and the corresponding feature vector would be one row in the table.
-If you live in New York or San Francisco,
-and you are not the CEO of Amazon, Google, Microsoft, or Facebook,
-the (sq. footage, no. of bedrooms, no. of bathrooms, walking distance)
-feature vector for your home might look something like: $[600, 1, 1, 60]$.
-However, if you live in Pittsburgh, it might look more like $[3000, 4, 3, 10]$.
-Feature vectors like this are essential
-for most classic machine learning algorithms.
+Forse il compito di apprendimento supervisionato più semplice
+da comprendere è la *regressione*.
+Consideriamo, per esempio, un insieme di dati raccolti
+da un database di vendite di case.
+Potremmo costruire una tabella, 
+dove ogni riga corrisponde ad una casa diversa,
+e ogni colonna corrisponde a qualche attributo rilevante,
+come la metratura di una casa, 
+il numero di camere da letto, il numero di bagni e il numero di minuti (a piedi) dal centro della città.
+In questo set di dati, ogni esempio sarebbe una casa specifica,
+e il corrispondente vettore di caratteristiche sarebbe una riga della tabella.
+Se vivi a New York o San Francisco,
+e non sei l'amministratore delegato di Amazon, Google, Microsoft o Facebook,
+il (metri quadri, numero di camere da letto, numero di bagni, distanza a piedi)
+per la vostra casa potrebbe apparire qualcosa come: $[600, 1, 1, 60]$.
+Tuttavia, se vivete a Pittsburgh, potrebbe essere più simile a $[3000, 4, 3, 10]$.
+Vettori di caratteristiche come questo sono essenziali
+per la maggior parte degli algoritmi classici di apprendimento automatico.
 
-What makes a problem a regression is actually the output.
-Say that you are in the market for a new home.
-You might want to estimate the fair market value of a house,
-given some features like above.
-The label, the price of sale, is a numerical value.
-When labels take on arbitrary numerical values,
-we call this a *regression* problem.
-Our goal is to produce a model whose predictions
-closely approximate the actual label values.
-
-
-Lots of practical problems are well-described regression problems.
-Predicting the rating that a user will assign to a movie
-can be thought of as a regression problem
-and if you designed a great algorithm to accomplish this feat in 2009,
-you might have won the [1-million-dollar Netflix prize](https://en.wikipedia.org/wiki/Netflix_Prize).
-Predicting the length of stay for patients in the hospital
-is also a regression problem.
-A good rule of thumb is that any *how much?* or *how many?* problem
-should suggest regression,
-such as:
-
-* How many hours will this surgery take?
-* How much rainfall will this town have in the next six hours?
+Ciò che rende un problema una regressione è in realtà l'output.
+Diciamo che siete sul mercato per una nuova casa.
+Potreste voler stimare il valore di mercato di una casa,
+date alcune caratteristiche come sopra.
+L'etichetta, il prezzo di vendita, è un valore numerico.
+Quando le etichette assumono valori numerici arbitrari,
+lo chiamiamo un problema di *regressione*.
+Il nostro obiettivo è produrre un modello le cui previsioni
+si avvicinano molto ai valori reali dell'etichetta.
 
 
-Even if you have never worked with machine learning before,
-you have probably worked through a regression problem informally.
-Imagine, for example, that you had your drains repaired
-and that your contractor spent 3 hours
-removing gunk from your sewage pipes.
-Then he sent you a bill of 350 dollars.
-Now imagine that your friend hired the same contractor for 2 hours
-and that he received a bill of 250 dollars.
-If someone then asked you how much to expect
-on their upcoming gunk-removal invoice
-you might make some reasonable assumptions,
-such as more hours worked costs more dollars.
-You might also assume that there is some base charge
-and that the contractor then charges per hour.
-If these assumptions held true, then given these two data examples,
-you could already identify the contractor's pricing structure:
-100 dollars per hour plus 50 dollars to show up at your house.
-If you followed that much then you already understand
-the high-level idea behind linear regression.
+Molti problemi pratici sono problemi di regressione ben descritti.
+Prevedere la valutazione che un utente assegnerà ad un film
+può essere pensato come un problema di regressione
+e se avete progettato un grande algoritmo per compiere questa impresa nel 2009,
+avreste potuto vincere il [premio Netflix da 1 milione di dollari](https://en.wikipedia.org/wiki/Netflix_Prize).
+Prevedere la durata della permanenza dei pazienti in ospedale
+è anche un problema di regressione.
+Una buona regola pratica è che qualsiasi problema *quanto?* o *quanto?*
+dovrebbe suggerire la regressione,
+come ad esempio:
 
-In this case, we could produce the parameters
-that exactly matched the contractor's prices.
-Sometimes this is not possible, 
-e.g., if some of
-the variance owes to a few factors 
-besides your two features.
-In these cases, we will try to learn models
-that minimize the distance between our predictions and the observed values.
-In most of our chapters, we will focus on 
-minimizing the squared error loss function.
-As we will see later, this loss corresponds to the assumption
-that our data were corrupted by Gaussian noise.
+* Quante ore ci vorranno per questo intervento?
+* Quanta pioggia ci sarà in questa città nelle prossime sei ore?
 
-#### Classification
 
-While regression models are great for addressing *how many?* questions,
-lots of problems do not bend comfortably to this template.
-For example,
-a bank wants to add check scanning to its mobile app.
-This would involve the customer snapping a photo of a check
-with their smart phone's camera
-and the app would need to be able
-to automatically understand text seen in the image.
-Specifically,
-it would also need to understand handwritten text to be even more robust,
-such as mapping a handwritten character
-to one of the known characters.
-This kind of *which one?* problem is called *classification*.
-It is treated with a different set of algorithms
-than those used for regression although many techniques will carry over.
+Anche se non avete mai lavorato prima con il machine learning,
+probabilmente avete lavorato in modo informale su un problema di regressione.
+Immaginate, per esempio, che abbiate fatto riparare i vostri scarichi
+e che il vostro appaltatore abbia passato 3 ore
+a rimuovere la sporcizia dai vostri tubi di scarico.
+Poi ti ha mandato una fattura di 350 dollari.
+Ora immaginate che il vostro amico abbia assunto lo stesso appaltatore per 2 ore
+e che abbia ricevuto una fattura di 250 dollari.
+Se qualcuno vi chiedesse poi quanto aspettarsi
+sulla sua prossima fattura per la rimozione del gasolio
+potreste fare alcune ipotesi ragionevoli,
+come ad esempio che più ore lavorate costano più dollari.
+Si potrebbe anche supporre che ci sia un costo di base
+e che l'appaltatore si faccia pagare all'ora.
+Se queste ipotesi fossero vere, allora, dati questi due esempi di dati,
+si potrebbe già identificare la struttura dei prezzi dell'appaltatore:
+100 dollari all'ora più 50 dollari per presentarsi a casa vostra.
+Se avete seguito tutto ciò, allora avete già capito
+l'idea di alto livello dietro la regressione lineare.
 
-In *classification*, we want our model to look at features,
-e.g., the pixel values in an image,
-and then predict which *category* (formally called *class*),
-among some discrete set of options, an example belongs.
-For handwritten digits, we might have ten classes,
-corresponding to the digits 0 through 9.
-The simplest form of classification is when there are only two classes,
-a problem which we call *binary classification*.
-For example, our dataset could consist of images of animals
-and our labels  might be the classes $\mathrm{\{cat, dog\}}$.
-While in regression, we sought a regressor to output a numerical value,
-in classification, we seek a classifier, whose output is the predicted class assignment.
+In questo caso, potremmo produrre i parametri
+che corrispondono esattamente ai prezzi dell'appaltatore.
+A volte questo non è possibile, 
+per esempio, se una parte della
+della varianza è dovuta a qualche fattore 
+oltre alle due caratteristiche.
+In questi casi, cercheremo di imparare modelli
+che minimizzano la distanza tra le nostre previsioni e i valori osservati.
+Nella maggior parte dei nostri capitoli, ci concentreremo su 
+minimizzare la funzione di perdita dell'errore quadratico.
+Come vedremo più avanti, questa perdita corrisponde all'ipotesi
+che i nostri dati siano corrotti da rumore gaussiano.
 
-For reasons that we will get into as the book gets more technical,
-it can be hard to optimize a model that can only output
-a hard categorical assignment, 
-e.g., either "cat" or "dog".
-In these cases, it is usually much easier to instead express
-our model in the language of probabilities.
-Given features of an example, 
-our model assigns a probability
-to each possible class. 
-Returning to our animal classification example
-where the classes are $\mathrm{\{cat, dog\}}$,
-a classifier might see an image and output the probability
-that the image is a cat as 0.9.
-We can interpret this number by saying that the classifier
-is 90\% sure that the image depicts a cat.
-The magnitude of the probability for the predicted class
-conveys one notion of uncertainty.
-It is not the only notion of uncertainty
-and we will discuss others in more advanced chapters.
+#### Classificazione
 
-When we have more than two possible classes,
-we call the problem *multiclass classification*.
-Common examples include hand-written character recognition
-$\mathrm{\{0, 1, 2, ... 9, a, b, c, ...\}}$.
-While we attacked regression problems by trying
-to minimize the squared error loss function,
-the common loss function for classification problems is called *cross-entropy*,
-whose name can be demystified 
-via an introduction to information theory in subsequent chapters.
+Mentre i modelli di regressione sono ottimi per affrontare le domande *quante?*,
+molti problemi non si piegano comodamente a questo modello.
+Per esempio,
+una banca vuole aggiungere la scansione degli assegni alla sua applicazione mobile.
+Questo comporterebbe che il cliente scatti una foto di un assegno
+con la fotocamera del loro smartphone
+e l'app dovrebbe essere in grado di
+capire automaticamente il testo visto nell'immagine.
+In particolare,
+dovrebbe anche capire il testo scritto a mano per essere ancora più robusto,
+come la mappatura di un carattere scritto a mano
+a uno dei caratteri noti.
+Questo tipo di problema *quale?* è chiamato *classificazione*.
+Viene trattato con un diverso insieme di algoritmi
+rispetto a quelli usati per la regressione, anche se molte tecniche si ripeteranno.
 
-Note that the most likely class is not necessarily
-the one that you are going to use for your decision.
-Assume that you find a beautiful mushroom in your backyard
-as shown in :numref:`fig_death_cap`.
+Nella *classificazione*, vogliamo che il nostro modello guardi le caratteristiche,
+ad esempio, i valori dei pixel in un'immagine,
+e poi predica quale *categoria* (formalmente chiamata *classe*),
+tra un insieme discreto di opzioni, un esempio appartiene.
+Per le cifre scritte a mano, potremmo avere dieci classi,
+corrispondenti alle cifre da 0 a 9.
+La forma più semplice di classificazione è quando ci sono solo due classi,
+un problema che chiamiamo *classificazione binaria*.
+Per esempio, il nostro set di dati potrebbe consistere in immagini di animali
+e le nostre etichette potrebbero essere le classi $\mathrm{cat, dog\}}$.
+Mentre nella regressione, cerchiamo un regressore che produca un valore numerico,
+nella classificazione, cerchiamo un classificatore, il cui output è l'assegnazione della classe prevista.
 
-![Death cap---do not eat!](../img/death-cap.jpg)
+Per ragioni che approfondiremo man mano che il libro diventa più tecnico,
+può essere difficile ottimizzare un modello che può produrre solo
+un'assegnazione categorica rigida, 
+per esempio, o "gatto" o "cane".
+In questi casi, di solito è molto più facile esprimere invece
+il nostro modello nel linguaggio delle probabilità.
+Date le caratteristiche di un esempio, 
+il nostro modello assegna una probabilità
+ad ogni possibile classe. 
+Tornando al nostro esempio di classificazione degli animali
+dove le classi sono $mathrm{ gatto, cane}},
+un classificatore potrebbe vedere un'immagine e produrre la probabilità
+che l'immagine sia un gatto come 0,9.
+Possiamo interpretare questo numero dicendo che il classificatore
+è sicuro al 90 % che l'immagine raffiguri un gatto.
+La grandezza della probabilità per la classe predetta
+trasmette una nozione di incertezza.
+Non è l'unica nozione di incertezza
+e ne discuteremo altre in capitoli più avanzati.
+
+Quando abbiamo più di due classi possibili,
+chiamiamo il problema *classificazione a più classi*.
+Esempi comuni includono il riconoscimento dei caratteri scritti a mano
+0, 1, 2, ... 9, a, b, c, ...\}}$.
+Mentre abbiamo attaccato i problemi di regressione cercando
+di minimizzare la funzione di perdita dell'errore quadratico,
+la funzione di perdita comune per i problemi di classificazione si chiama *entropia incrociata*,
+il cui nome può essere demistificato 
+attraverso un'introduzione alla teoria dell'informazione nei capitoli successivi. 
+
+Notate che la classe più probabile non è necessariamente
+quello che userete per la vostra decisione.
+Supponiamo che troviate un bel fungo nel vostro giardino
+come mostrato in :numref:`fig_death_cap`.
+
+![Death cap--non mangiare!](../img/death-cap.jpg)
 :width:`200px`
 :label:`fig_death_cap`
 
-Now, assume that you built a classifier and trained it
-to predict if a mushroom is poisonous based on a photograph.
-Say our poison-detection classifier outputs
-that the probability that
-:numref:`fig_death_cap` contains a death cap is 0.2.
-In other words, the classifier is 80\% sure
-that our mushroom is not a death cap.
-Still, you would have to be a fool to eat it.
-That is because the certain benefit of a delicious dinner
-is not worth a 20\% risk of dying from it.
-In other words, the effect of the uncertain risk
-outweighs the benefit by far.
-Thus, we need to compute the expected risk that we incur as the loss function,
-i.e., we need to multiply the probability of the outcome
-with the benefit (or harm) associated with it.
-In this case,
-the loss incurred by eating the mushroom
-can be $0.2 \times \infty + 0.8 \times 0 = \infty$,
-whereas the loss of discarding it is
-$0.2 \times 0 + 0.8 \times 1 = 0.8$.
-Our caution was justified:
-as any mycologist would tell us,
-the mushroom in :numref:`fig_death_cap` actually
-is a death cap.
+Ora, supponiamo che tu abbia costruito un classificatore e l'abbia addestrato
+per prevedere se un fungo è velenoso sulla base di una fotografia.
+Diciamo che il nostro classificatore di rilevamento del veleno produca
+che la probabilità che
+:numref:`fig_death_cap` contiene un tappo mortale è 0,2.
+In altre parole, il classificatore è sicuro all'80
+che il nostro fungo non è un tappo mortale.
+Tuttavia, dovreste essere pazzi a mangiarlo.
+Questo perché il beneficio certo di una cena deliziosa
+non vale il rischio del 20% di morirne.
+In altre parole, l'effetto del rischio incerto
+supera di gran lunga il beneficio.
+Quindi, abbiamo bisogno di calcolare il rischio atteso in cui incorriamo come funzione di perdita,
+cioè, dobbiamo moltiplicare la probabilità del risultato
+con il beneficio (o danno) associato ad esso.
+In questo caso,
+la perdita subita mangiando il fungo
+può essere pari a 0,2 volte \infty + 0,8 volte 0 = \infty$,
+mentre la perdita di scartarlo è
+0,2 $ per 0 + 0,8 $ per 1 = 0,8$.
+La nostra cautela era giustificata:
+come ci direbbe qualsiasi micologo,
+il fungo in :numref:`fig_death_cap` in realtà
+è un tappo mortale.
 
-Classification can get much more complicated than just
-binary, multiclass, or even multi-label classification.
-For instance, there are some variants of classification
-for addressing hierarchies.
-Hierarchies assume that there exist some relationships among the many classes.
-So not all errors are equal---if we must err, we would prefer
-to misclassify to a related class rather than to a distant class.
-Usually, this is referred to as *hierarchical classification*.
-One early example is due to [Linnaeus](https://en.wikipedia.org/wiki/Carl_Linnaeus), who organized the animals in a hierarchy.
+La classificazione può diventare molto più complicata di una semplice
+classificazione binaria, multiclasse o anche multietichetta.
+Per esempio, ci sono alcune varianti di classificazione
+per affrontare le gerarchie.
+Le gerarchie presuppongono che esistano alcune relazioni tra le varie classi.
+Quindi non tutti gli errori sono uguali - se dobbiamo sbagliare, preferiamo
+sbagliare la classificazione in una classe correlata piuttosto che in una classe lontana.
+Di solito, ci si riferisce a questo come *classificazione gerarchica*.
+Un primo esempio è dovuto a [Linneo](https://en.wikipedia.org/wiki/Carl_Linnaeus), che ha organizzato gli animali in una gerarchia.
 
-In the case of animal classification,
-it might not be so bad to mistake a poodle (a dog breed) for a schnauzer (another dog breed),
-but our model would pay a huge penalty
-if it confused a poodle for a dinosaur.
-Which hierarchy is relevant might depend
-on how you plan to use the model.
-For example, rattle snakes and garter snakes
-might be close on the phylogenetic tree,
-but mistaking a rattler for a garter could be deadly.
+Nel caso della classificazione degli animali,
+potrebbe non essere così male confondere un barboncino (una razza di cane) con uno schnauzer (un'altra razza di cane),
+ma il nostro modello pagherebbe una penalità enorme
+se confondesse un barboncino per un dinosauro.
+Quale gerarchia è rilevante potrebbe dipendere
+da come pensate di usare il modello.
+Per esempio, i serpenti a sonagli e i serpenti giarrettiera
+potrebbero essere vicini sull'albero filogenetico,
+ma scambiare un serpente a sonagli per una giarrettiera potrebbe essere mortale.
 
 #### Tagging
 
-Some classification problems fit neatly
-into the binary or multiclass classification setups.
-For example, we could train a normal binary classifier
-to distinguish cats from dogs.
-Given the current state of computer vision,
-we can do this easily, with off-the-shelf tools.
-Nonetheless, no matter how accurate our model gets,
-we might find ourselves in trouble when the classifier
-encounters an image of the *Town Musicians of Bremen*,
-a popular German fairy tale featuring four animals
+Alcuni problemi di classificazione rientrano perfettamente
+nei setup di classificazione binaria o multiclasse.
+Per esempio, potremmo addestrare un normale classificatore binario
+per distinguere i gatti dai cani.
+Dato lo stato attuale della computer vision,
+possiamo farlo facilmente, con strumenti standard.
+Tuttavia, non importa quanto sia accurato il nostro modello,
+potremmo trovarci nei guai quando il classificatore
+incontra un'immagine dei *Musicisti della città di Brema*,
+una popolare fiaba tedesca con quattro animali
 in :numref:`fig_stackedanimals`.
 
-![A donkey, a dog, a cat, and a rooster.](../img/stackedanimals.png)
+Un asino, un cane, un gatto e un gallo.](../img/stackedanimals.png)
 :width:`300px`
 :label:`fig_stackedanimals`
 
-As you can see, there is a cat in :numref:`fig_stackedanimals`,
-and a rooster, a dog, and a donkey,
-with some trees in the background.
-Depending on what we want to do with our model
-ultimately, treating this as a binary classification problem
-might not make a lot of sense.
-Instead, we might want to give the model the option of
-saying the image depicts a cat, a dog, a donkey,
-*and* a rooster.
+Come puoi vedere, c'è un gatto in :numref:`fig_stackedanimals`,
+e un gallo, un cane e un asino,
+con alcuni alberi sullo sfondo.
+A seconda di cosa vogliamo fare con il nostro modello
+alla fine, trattare questo come un problema di classificazione binaria
+potrebbe non avere molto senso.
+Invece, potremmo voler dare al modello la possibilità di
+dire che l'immagine rappresenta un gatto, un cane, un asino,
+*e* un gallo.
 
-The problem of learning to predict classes that are
-not mutually exclusive is called *multi-label classification*.
-Auto-tagging problems are typically best described
-as multi-label classification problems.
-Think of the tags people might apply to posts on a technical blog,
-e.g., "machine learning", "technology", "gadgets",
-"programming languages", "Linux", "cloud computing", "AWS".
-A typical article might have 5--10 tags applied
-because these concepts are correlated.
-Posts about "cloud computing" are likely to mention "AWS"
-and posts about "machine learning" could also deal
-with "programming languages".
+Il problema di imparare a predire classi che non si
+non si escludono a vicenda è chiamato *classificazione multietichetta*.
+I problemi di auto-tagging sono tipicamente descritti
+come problemi di classificazione multietichetta.
+Pensate ai tag che la gente potrebbe applicare ai post su un blog tecnico,
+ad esempio, "apprendimento automatico", "tecnologia", "gadget",
+"linguaggi di programmazione", "Linux", "cloud computing", "AWS".
+Un tipico articolo potrebbe avere 5-10 tag applicati
+perché questi concetti sono correlati.
+I post sul "cloud computing" è probabile che menzionino "AWS"
+e i post su "apprendimento automatico" potrebbero anche trattare
+con "linguaggi di programmazione".
 
-We also have to deal with this kind of problem when dealing
-with the biomedical literature, where correctly tagging articles is important
-because it allows researchers to do exhaustive reviews of the literature.
-At the National Library of Medicine, a number of professional annotators
-go over each article that gets indexed in PubMed
-to associate it with the relevant terms from MeSH,
-a collection of roughly 28000 tags.
-This is a time-consuming process and the
-annotators typically have a one-year lag between archiving and tagging.
-Machine learning can be used here to provide provisional tags
-until each article can have a proper manual review.
-Indeed, for several years, the BioASQ organization
-has [hosted competitions](http://bioasq.org/) to do precisely this.
+Abbiamo anche a che fare con questo tipo di problema quando si tratta
+con la letteratura biomedica, dove è importante etichettare correttamente gli articoli
+perché permette ai ricercatori di fare revisioni esaustive della letteratura.
+Alla National Library of Medicine, un certo numero di annotatori professionisti
+esaminano ogni articolo che viene indicizzato in PubMed
+per associarlo ai termini rilevanti di MeSH,
+una collezione di circa 28000 tag.
+Questo è un processo che richiede tempo e gli
+annotatori in genere hanno un ritardo di un anno tra l'archiviazione e l'assegnazione dei tag.
+L'apprendimento automatico può essere usato qui per fornire tag provvisori
+fino a quando ogni articolo può avere un'adeguata revisione manuale.
+Infatti, per diversi anni, l'organizzazione BioASQ
+ha [ospitato concorsi](http://bioasq.org/) per fare proprio questo.
 
-#### Search 
+#### Ricerca 
 
-Sometimes we do not just want to assign each example to a bucket
-or to a real value. In the field of information retrieval,
-we want to impose a ranking on a set of items.
-Take web search for an example. 
-The goal is less to determine whether
-a particular page is relevant for a query, but rather,
-which one of the plethora of search results is
-most relevant
-for a particular user.
-We really care about the ordering of the relevant search results
-and our learning algorithm needs to produce ordered subsets
-of elements from a larger set.
-In other words, if we are asked to produce the first 5 letters from the alphabet, there is a difference
-between returning "A B C D E" and "C A B E D".
-Even if the result set is the same,
-the ordering within the set matters.
+A volte non vogliamo semplicemente assegnare ogni esempio ad un secchio
+o ad un valore reale. Nel campo dell'information retrieval,
+vogliamo imporre una classifica su un insieme di elementi.
+Prendiamo ad esempio la ricerca sul web. 
+L'obiettivo non è tanto determinare se
+una particolare pagina è rilevante per una query, ma piuttosto,
+quale tra la pletora di risultati di ricerca è
+più rilevante
+per un particolare utente.
+Ci interessa davvero l'ordine dei risultati di ricerca rilevanti
+e il nostro algoritmo di apprendimento deve produrre sottoinsiemi ordinati
+di elementi da un insieme più ampio.
+In altre parole, se ci viene chiesto di produrre le prime 5 lettere dell'alfabeto, c'è una differenza
+tra restituire "A B C D E" e "C A B E D".
+Anche se l'insieme dei risultati è lo stesso,
+l'ordine all'interno dell'insieme conta.
 
-One possible solution to this problem is to first assign
-to every element in the set a corresponding relevance score
-and then to retrieve the top-rated elements.
+Una possibile soluzione a questo problema è di assegnare prima
+ad ogni elemento dell'insieme un punteggio di rilevanza corrispondente
+e poi recuperare gli elementi con il punteggio più alto.
 [PageRank](https://en.wikipedia.org/wiki/PageRank),
-the original secret sauce behind the Google search engine
-was an early example of such a scoring system but it was
-peculiar in that it did not depend on the actual query.
-Here they relied on a simple relevance filter
-to identify the set of relevant items
-and then on PageRank to order those results
-that contained the query term.
-Nowadays, search engines use machine learning and behavioral models
-to obtain query-dependent relevance scores.
-There are entire academic conferences devoted to this subject.
+la salsa segreta originale dietro il motore di ricerca Google
+era un primo esempio di un tale sistema di punteggio, ma era
+peculiare in quanto non dipendeva dalla query effettiva.
+Qui si basava su un semplice filtro di rilevanza
+per identificare l'insieme di elementi rilevanti
+e poi su PageRank per ordinare i risultati
+che contenevano il termine della query.
+Oggi, i motori di ricerca usano l'apprendimento automatico e modelli comportamentali
+per ottenere punteggi di rilevanza dipendenti dalla query.
+Ci sono intere conferenze accademiche dedicate a questo argomento.
 
 #### Recommender Systems
 :label:`subsec_recommender_systems`
 
-Recommender systems are another problem setting
-that is related to search and ranking.
-The problems are similar insofar as the goal
-is to display a set of relevant items to the user.
-The main difference is the emphasis on
-*personalization*
-to specific users in the context of recommender systems.
-For instance, for movie recommendations,
-the results page for a science fiction fan
-and the results page
-for a connoisseur of Peter Sellers comedies might differ significantly.
-Similar problems pop up in other recommendation settings,
-e.g., for retail products, music, and news recommendation.
+I sistemi di raccomandazione sono un'altra impostazione del problema
+che è collegato alla ricerca e al ranking.
+I problemi sono simili nella misura in cui l'obiettivo
+è quello di visualizzare un insieme di elementi rilevanti per l'utente.
+La differenza principale è l'enfasi su
+*personalizzazione*
+a specifici utenti nel contesto dei sistemi di raccomandazione.
+Per esempio, per le raccomandazioni di film,
+la pagina dei risultati per un fan della fantascienza
+e la pagina dei risultati
+per un conoscitore di commedie di Peter Sellers potrebbero differire significativamente.
+Problemi simili si presentano in altre impostazioni di raccomandazione,
+ad esempio, per i prodotti al dettaglio, la musica e la raccomandazione di notizie.
 
-In some cases, customers provide explicit feedback communicating
-how much they liked a particular product
-(e.g., the product ratings and reviews on Amazon, IMDb, and Goodreads).
-In some other cases, they provide implicit feedback,
-e.g., by skipping titles on a playlist,
-which might indicate dissatisfaction but might just indicate
-that the song was inappropriate in context.
-In the simplest formulations, these systems are trained
-to estimate some score,
-such as an estimated rating
-or the probability of purchase,
-given a user and an item.
+In alcuni casi, i clienti forniscono un feedback esplicito che comunica
+quanto gli è piaciuto un particolare prodotto
+(ad esempio, le valutazioni e le recensioni dei prodotti su Amazon, IMDb e Goodreads).
+In altri casi, forniscono un feedback implicito,
+per esempio, saltando i titoli di una playlist,
+il che potrebbe indicare insoddisfazione, ma potrebbe semplicemente indicare
+che la canzone era inappropriata nel contesto.
+Nelle formulazioni più semplici, questi sistemi sono addestrati
+per stimare un certo punteggio,
+come una valutazione stimata
+o la probabilità di acquisto,
+dato un utente e un oggetto.
 
-Given such a model, 
-for any given user,
-we could retrieve the set of objects with the largest scores,
-which could then be recommended to the user.
-Production systems are considerably more advanced and take
-detailed user activity and item characteristics into account
-when computing such scores. :numref:`fig_deeplearning_amazon` is an example
-of deep learning books recommended by Amazon based on personalization algorithms tuned to capture one's preferences.
+Dato un tale modello, 
+per ogni dato utente,
+potremmo recuperare l'insieme di oggetti con i maggiori punteggi,
+che potrebbero poi essere raccomandati all'utente.
+I sistemi di produzione sono considerevolmente più avanzati e prendono
+l'attività dettagliata dell'utente e le caratteristiche degli oggetti
+quando si calcolano tali punteggi. :numref:`fig_deeplearning_amazon` è un esempio
+di apprendimento profondo dei libri raccomandati da Amazon sulla base di algoritmi di personalizzazione messi a punto per catturare le preferenze di una persona.
 
-![Deep learning books recommended by Amazon.](../img/deeplearning-amazon.jpg)
+Libri di apprendimento profondo raccomandati da Amazon](../img/deeplearning-amazon.jpg)
 :label:`fig_deeplearning_amazon`
 
-Despite their tremendous economic value,
-recommendation systems
-naively built on top of predictive models
-suffer some serious conceptual flaws.
-To start, we only observe *censored feedback*:
-users preferentially rate movies that they feel strongly about.
-For example, 
-on a five-point scale,
-you might notice that items receive many five and one star ratings
-but that there are conspicuously few three-star ratings.
-Moreover, current purchase habits are often a result
-of the recommendation algorithm currently in place,
-but learning algorithms do not always take this detail into account.
-Thus it is possible for feedback loops to form
-where a recommender system preferentially pushes an item
-that is then taken to be better (due to greater purchases)
-and in turn is recommended even more frequently.
-Many of these problems about how to deal with censoring,
-incentives, and feedback loops, are important open research questions.
+Nonostante il loro enorme valore economico,
+sistemi di raccomandazione
+ingenuamente costruiti sulla base di modelli predittivi
+soffrono di alcuni gravi difetti concettuali.
+Per cominciare, osserviamo solo il feedback *censurato*:
+gli utenti valutano preferenzialmente i film che sentono fortemente.
+Per esempio, 
+su una scala a cinque punti,
+si potrebbe notare che gli articoli ricevono molti voti a cinque e una stella
+ma che ci sono cospicuamente poche valutazioni a tre stelle.
+Inoltre, le attuali abitudini di acquisto sono spesso un risultato
+dell'algoritmo di raccomandazione attualmente in uso,
+ma gli algoritmi di apprendimento non sempre tengono conto di questo dettaglio.
+Così è possibile che si formino dei cicli di feedback
+dove un sistema di raccomandazione spinge preferenzialmente un articolo
+che viene poi considerato migliore (a causa dei maggiori acquisti)
+e a sua volta viene raccomandato ancora più frequentemente.
+Molti di questi problemi su come affrontare la censura,
+incentivi e cicli di feedback, sono importanti domande di ricerca aperte.
 
-#### Sequence Learning
+#### Apprendimento delle sequenze
 
-So far, we have looked at problems where we have
-some fixed number of inputs and produce a fixed number of outputs.
-For example,
-we considered predicting house prices from a fixed set of features: square footage, number of bedrooms,
-number of bathrooms, walking time to downtown.
-We also discussed mapping from an image (of fixed dimension)
-to the predicted probabilities that it belongs to each
-of a fixed number of classes, or taking a user ID and a product ID,
-and predicting a star rating. In these cases,
-once we feed our fixed-length input
-into the model to generate an output,
-the model immediately forgets what it just saw.
+Finora abbiamo esaminato problemi in cui abbiamo
+un certo numero fisso di input e produciamo un numero fisso di output.
+Per esempio,
+abbiamo considerato la previsione dei prezzi delle case da un insieme fisso di caratteristiche: metratura, numero di camere da letto,
+numero di bagni, tempo di percorrenza a piedi fino al centro città.
+Abbiamo anche discusso la mappatura da un'immagine (di dimensione fissa)
+alle probabilità previste che appartenga a ciascuna
+di un numero fisso di classi, o prendendo un ID utente e un ID prodotto,
+e prevedendo una valutazione a stelle. In questi casi,
+una volta che alimentiamo il nostro input a lunghezza fissa
+nel modello per generare un output,
+il modello dimentica immediatamente ciò che ha appena visto.
 
-This might be fine if our inputs truly all have the same dimensions
-and if successive inputs truly have nothing to do with each other.
-But how would we deal with video snippets?
-In this case, each snippet might consist of a different number of frames.
-And our guess of what is going on in each frame might be much stronger
-if we take into account the previous or succeeding frames.
-Same goes for language. One popular deep learning problem
-is machine translation: the task of ingesting sentences
-in some source language and predicting their translation in another language.
+Questo potrebbe andare bene se i nostri input avessero veramente tutti le stesse dimensioni
+e se gli input successivi non hanno veramente nulla a che fare l'uno con l'altro.
+Ma come faremmo con i frammenti di video?
+In questo caso, ogni frammento potrebbe consistere in un numero diverso di fotogrammi.
+E la nostra ipotesi di cosa sta succedendo in ogni fotogramma potrebbe essere molto più forte
+se teniamo conto dei fotogrammi precedenti o successivi.
+Lo stesso vale per il linguaggio. Un popolare problema di deep learning
+è la traduzione automatica: il compito di ingerire frasi
+in una lingua di partenza e prevedere la loro traduzione in un'altra lingua.
 
-These problems also occur in medicine.
-We might want a model to monitor patients in the intensive care unit
-and to fire off alerts if their risk of death
-in the next 24 hours exceeds some threshold.
-We definitely would not want this model to throw away
-everything it knows about the patient history each hour
-and just make its predictions based on the most recent measurements.
+Questi problemi si verificano anche in medicina.
+Potremmo volere un modello per monitorare i pazienti nel reparto di terapia intensiva
+e che emetta avvisi se il loro rischio di morte
+nelle prossime 24 ore supera una certa soglia.
+Sicuramente non vogliamo che questo modello butti via
+tutto ciò che sa sulla storia del paziente ogni ora
+e faccia le sue previsioni solo sulla base delle misurazioni più recenti.
 
-These problems are among the most exciting applications of machine learning
-and they are instances of *sequence learning*.
-They require a model to either ingest sequences of inputs
-or to emit sequences of outputs (or both).
-Specifically,
-*sequence to sequence learning* considers problems
-where input and output are both variable-length sequences,
-such as machine translation and transcribing text from the spoken speech.
-While it is impossible to consider all types of sequence transformations,
-the following special cases are worth mentioning.
+Questi problemi sono tra le applicazioni più eccitanti dell'apprendimento automatico
+e sono istanze di *apprendimento delle sequenze*.
+Richiedono un modello per ingerire sequenze di input
+o di emettere sequenze di output (o entrambi).
+In particolare,
+*l'apprendimento da sequenza a sequenza* considera problemi
+in cui l'input e l'output sono entrambi sequenze di lunghezza variabile,
+come la traduzione automatica e la trascrizione di testo dal parlato.
+Mentre è impossibile considerare tutti i tipi di trasformazioni di sequenza,
+vale la pena menzionare i seguenti casi speciali.
 
-**Tagging and Parsing**. This involves annotating a text sequence with attributes.
-In other words, the number of inputs and outputs is essentially the same.
-For instance, we might want to know where the verbs and subjects are.
-Alternatively, we might want to know which words are the named entities.
-In general, the goal is to decompose and annotate text based on structural
-and grammatical assumptions to get some annotation.
-This sounds more complex than it actually is.
-Below is a very simple example of annotating a sentence
-with tags indicating which words refer to named entities (tagged as "Ent").
+**Tagging e Parsing**. Si tratta di annotare una sequenza di testo con attributi.
+In altre parole, il numero di ingressi e uscite è essenzialmente lo stesso.
+Per esempio, potremmo voler sapere dove sono i verbi e i soggetti.
+In alternativa, potremmo voler sapere quali parole sono le entità nominate.
+In generale, l'obiettivo è quello di decomporre e annotare il testo sulla base di presupposti strutturali
+e grammaticali per ottenere qualche annotazione.
+Questo sembra più complesso di quanto sia in realtà.
+Di seguito è riportato un esempio molto semplice di annotazione di una frase
+con tag che indicano quali parole si riferiscono a entità nominate (etichettate come "Ent").
 
-```text
-Tom has dinner in Washington with Sally
-Ent  -    -    -     Ent      -    Ent
+``testo
+Tom cena a Washington con Sally
+Ent - - - Ent - Ent
 ```
 
 
-**Automatic Speech Recognition**. With speech recognition, the input sequence
-is an audio recording of a speaker (shown in :numref:`fig_speech`), and the output 
-is the textual transcript of what the speaker said.
-The challenge is that there are many more audio frames
-(sound is typically sampled at 8kHz or 16kHz)
-than text, i.e., there is no 1:1 correspondence between audio and text,
-since thousands of samples may
-correspond to a single spoken word.
-These are sequence to sequence learning problems where the output is much shorter than the input.
+**Riconoscimento vocale automatico**. Con il riconoscimento vocale, la sequenza di input
+è una registrazione audio di un oratore (mostrata in :numref:`fig_speech`), e l'output 
+è la trascrizione testuale di ciò che l'oratore ha detto.
+La sfida è che ci sono molti più frame audio
+(il suono è tipicamente campionato a 8kHz o 16kHz)
+rispetto al testo, cioè non c'è una corrispondenza 1:1 tra audio e testo,
+poiché migliaia di campioni possono
+corrispondere a una singola parola parlata.
+Questi sono problemi di apprendimento da sequenza a sequenza in cui l'output è molto più breve dell'input.
 
-![`-D-e-e-p- L-ea-r-ni-ng-` in an audio recording.](../img/speech.png)
+![`-D-e-e-p- L-ea-r-ni-ng-` in una registrazione audio.](../img/speech.png)
 :width:`700px`
-:label:`fig_speech`
+:label:`fig_speech`.
 
-**Text to Speech**. This is the inverse of automatic speech recognition.
-In other words, the input is text
-and the output is an audio file.
-In this case, the output is much longer than the input.
-While it is easy for humans to recognize a bad audio file,
-this is not quite so trivial for computers.
+**Text to Speech**. Questo è l'inverso del riconoscimento vocale automatico.
+In altre parole, l'input è il testo
+e l'output è un file audio.
+In questo caso, l'output è molto più lungo dell'input.
+Mentre è facile per gli umani riconoscere un cattivo file audio,
+questo non è così banale per i computer.
 
-**Machine Translation**. Unlike the case of speech recognition, where corresponding
-inputs and outputs occur in the same order (after alignment),
-in machine translation, order inversion can be vital.
-In other words, while we are still converting one sequence into another,
-neither the number of inputs and outputs nor the order
-of corresponding data examples are assumed to be the same.
-Consider the following illustrative example
-of the peculiar tendency of Germans
-to place the verbs at the end of sentences.
+**Traduzione automatica**. A differenza del caso del riconoscimento vocale, dove gli
+input e output si presentano nello stesso ordine (dopo l'allineamento),
+nella traduzione automatica, l'inversione dell'ordine può essere vitale.
+In altre parole, mentre stiamo ancora convertendo una sequenza in un'altra,
+né il numero di input e output né l'ordine
+degli esempi di dati corrispondenti si presume che siano gli stessi.
+Si consideri il seguente esempio illustrativo
+della peculiare tendenza dei tedeschi
+a mettere i verbi alla fine delle frasi.
 
-```text
-German:           Haben Sie sich schon dieses grossartige Lehrwerk angeschaut?
-English:          Did you already check out this excellent tutorial?
-Wrong alignment:  Did you yourself already this excellent tutorial looked-at?
+``testo
+Tedesco: Haben Sie sich schon dieses grossartige Lehrwerk angeschaut?
+Inglese:          Hai già dato un'occhiata a questo eccellente tutorial?
+Allineamento sbagliato:  Did you yourself already this excellent tutorial looked-at?
 ```
 
 
-Many related problems pop up in other learning tasks.
-For instance, determining the order in which a user
-reads a webpage is a two-dimensional layout analysis problem.
-Dialogue problems exhibit all kinds of additional complications,
-where determining what to say next requires taking into account
-real-world knowledge and the prior state of the conversation
-across long temporal distances.
-These are active areas of research.
+Molti problemi correlati si presentano in altri compiti di apprendimento.
+Per esempio, determinare l'ordine in cui un utente
+legge una pagina web è un problema di analisi del layout bidimensionale.
+I problemi di dialogo presentano tutti i tipi di complicazioni aggiuntive,
+dove determinare cosa dire dopo richiede di prendere in considerazione
+la conoscenza del mondo reale e lo stato precedente della conversazione
+attraverso lunghe distanze temporali.
+Queste sono aree attive di ricerca.
 
-### Unsupervised and Self-Supervised Learning
+### Apprendimento non supervisionato e auto-supervisionato
 
-All the examples so far were related to supervised learning,
-i.e., situations where we feed the model a giant dataset
-containing both the features and corresponding label values.
-You could think of the supervised learner as having
-an extremely specialized job and an extremely banal boss.
-The boss stands over your shoulder and tells you exactly what to do
-in every situation until you learn to map from situations to actions.
-Working for such a boss sounds pretty lame.
-On the other hand, it is easy to please this boss.
-You just recognize the pattern as quickly as possible
-and imitate their actions.
+Tutti gli esempi finora erano relativi all'apprendimento supervisionato,
+cioè situazioni in cui forniamo al modello un gigantesco set di dati
+contenente sia le caratteristiche che i corrispondenti valori di etichetta.
+Si potrebbe pensare all'apprendista supervisionato come se avesse
+un lavoro estremamente specializzato e un capo estremamente banale.
+Il capo sta sopra le tue spalle e ti dice esattamente cosa fare
+in ogni situazione finché non imparate a mappare dalle situazioni alle azioni.
+Lavorare per un tale capo sembra piuttosto noioso.
+D'altra parte, è facile compiacere questo capo.
+Basta riconoscere il modello il più rapidamente possibile
+e imitare le sue azioni.
 
-In a completely opposite way, it could be frustrating
-to work for a boss who has no idea what they want you to do.
-However, if you plan to be a data scientist, you had better get used to it.
-The boss might just hand you a giant dump of data and tell you to *do some data science with it!* 
-This sounds vague because it is.
-We call this class of problems *unsupervised learning*,
-and the type and number of questions we could ask
-is limited only by our creativity.
-We will address unsupervised learning techniques
-in later chapters. 
-To whet your appetite for now,
-we describe a few of the following questions you might ask.
+In modo completamente opposto, potrebbe essere frustrante
+lavorare per un capo che non ha idea di cosa vuole che tu faccia.
+Tuttavia, se hai intenzione di essere uno scienziato dei dati, è meglio che ti ci abitui.
+Il capo potrebbe semplicemente passarvi un'enorme discarica di dati e dirvi di *farci un po' di scienza dei dati!*. 
+Questo suona vago perché lo è.
+Chiamiamo questa classe di problemi *apprendimento non supervisionato*,
+e il tipo e il numero di domande che potremmo porre
+è limitato solo dalla nostra creatività.
+Ci occuperemo delle tecniche di apprendimento non supervisionato
+nei capitoli successivi. 
+Per stuzzicare l'appetito per ora,
+descriviamo alcune delle seguenti domande che potreste fare.
 
-* Can we find a small number of prototypes
-that accurately summarize the data?
-Given a set of photos, can we group them into landscape photos,
-pictures of dogs, babies, cats, and mountain peaks?
-Likewise, given a collection of users' browsing activities,
-can we group them into users with similar behavior?
-This problem is typically known as *clustering*.
-* Can we find a small number of parameters
-that accurately capture the relevant properties of the data?
-The trajectories of a ball are quite well described
-by velocity, diameter, and mass of the ball.
-Tailors have developed a small number of parameters
-that describe human body shape fairly accurately
-for the purpose of fitting clothes.
-These problems are referred to as *subspace estimation*.
-If the dependence is linear, it is called *principal component analysis*.
-* Is there a representation of (arbitrarily structured) objects
-in Euclidean space 
-such that symbolic properties can be well matched?
-This can be used to describe entities and their relations,
-such as "Rome" $-$ "Italy" $+$ "France" $=$ "Paris".
-* Is there a description of the root causes
-of much of the data that we observe?
-For instance, if we have demographic data
-about house prices, pollution, crime, location,
-education, and salaries, can we discover
-how they are related simply based on empirical data?
-The fields concerned with *causality* and *probabilistic graphical models* address this problem.
-* Another important and exciting recent development in unsupervised learning
-is the advent of *generative adversarial networks*.
-These give us a procedural way to synthesize data,
-even complicated unstructured data like images and audio.
-The underlying statistical mechanisms are tests
-to check whether real and fake data are the same.
+* Possiamo trovare un piccolo numero di prototipi
+che riassumono accuratamente i dati?
+Dato un insieme di foto, possiamo raggrupparle in foto di paesaggi,
+foto di cani, bambini, gatti e cime di montagna?
+Allo stesso modo, dato un insieme di attività di navigazione degli utenti,
+possiamo raggrupparli in utenti con comportamenti simili?
+Questo problema è tipicamente noto come *clustering*.
+* Possiamo trovare un piccolo numero di parametri
+che catturino accuratamente le proprietà rilevanti dei dati?
+Le traiettorie di una palla sono abbastanza ben descritte
+dalla velocità, dal diametro e dalla massa della palla.
+I sarti hanno sviluppato un piccolo numero di parametri
+che descrivono abbastanza accuratamente la forma del corpo umano
+allo scopo di adattare i vestiti.
+Questi problemi sono chiamati *sottospazio di stima*.
+Se la dipendenza è lineare, si parla di *analisi delle componenti principali*.
+* Esiste una rappresentazione di oggetti (arbitrariamente strutturati)
+nello spazio euclideo 
+tale che le proprietà simboliche possano essere ben abbinate?
+Questo può essere usato per descrivere entità e le loro relazioni,
+come "Roma" $-$ "Italia" $+$ "Francia" $=$ "Parigi".
+* Esiste una descrizione delle cause alla radice
+di molti dei dati che osserviamo?
+Per esempio, se abbiamo dati demografici
+sui prezzi delle case, l'inquinamento, la criminalità, la posizione,
+istruzione, e salari, possiamo scoprire
+come sono correlati semplicemente basandoci sui dati empirici?
+I campi che si occupano di *causalità* e *modelli grafici probabilistici* affrontano questo problema.
+* Un altro importante ed eccitante sviluppo recente nell'apprendimento non supervisionato
+è l'avvento delle *reti generative avversarie*.
+Queste ci danno un modo procedurale per sintetizzare i dati,
+anche complicati dati non strutturati come immagini e audio.
+I meccanismi statistici sottostanti sono test
+per verificare se i dati reali e quelli falsi sono gli stessi.
 
-As a form of unsupervised learning,
-*self-supervised learning*
-leverages unlabeled data 
-to provide supervision in training,
-such as by
-predicting some withheld part of the data
-using other parts.
-For text,
-we can train models 
-to "fill in the blanks"
-by predicting randomly masked words
-using their surrounding words (contexts)
-in big corpora without any labeling effort :cite:`Devlin.Chang.Lee.ea.2018`!
-For images,
-we may train models
-to tell the relative position
-between two cropped regions
-of the same image :cite:`Doersch.Gupta.Efros.2015`.
-In these two examples of self-supervised learning,
-training models to predict
-possible words and relative positions
-are both classification tasks
-(from supervised learning).
+Come forma di apprendimento non supervisionato,
+*apprendimento auto-supervisionato*
+sfrutta i dati non etichettati 
+per fornire una supervisione nell'addestramento,
+come ad esempio
+prevedendo una parte dei dati non etichettati
+utilizzando altre parti.
+Per il testo,
+possiamo addestrare modelli 
+a "riempire gli spazi vuoti"
+prevedendo parole mascherate a caso
+usando le parole circostanti (contesti)
+in grandi corpora senza alcuno sforzo di etichettatura :cite:`Devlin.Chang.Lee.ea.2018`!
+Per le immagini,
+possiamo addestrare modelli
+per dire la posizione relativa
+tra due regioni ritagliate
+della stessa immagine :cite:`Doersch.Gupta.Efros.2015`.
+In questi due esempi di apprendimento auto-supervisionato,
+l'addestramento di modelli per prevedere
+le possibili parole e le posizioni relative
+sono entrambi compiti di classificazione
+(dall'apprendimento supervisionato).
 
 
 
-### Interacting with an Environment
+### Interagire con un ambiente
 
-So far, we have not discussed where data actually
-comes from,
-or what actually happens when a machine learning model generates an output.
-That is because supervised learning and unsupervised learning
-do not address these issues in a very sophisticated way.
-In either case, we grab a big pile of data upfront,
-then set our pattern recognition machines in motion
-without ever interacting with the environment again.
-Because all of the learning takes place
-after the algorithm is disconnected from the environment,
-this is sometimes called *offline learning*.
-For supervised learning,
-the process by considering data collection from an environment looks like :numref:`fig_data_collection`.
+Finora, non abbiamo discusso da dove i dati effettivamente
+provengono,
+o cosa succede effettivamente quando un modello di apprendimento automatico genera un output.
+Questo perché l'apprendimento supervisionato e l'apprendimento non supervisionato
+non affrontano queste questioni in modo molto sofisticato.
+In entrambi i casi, prendiamo una grande quantità di dati in anticipo,
+poi mettiamo in moto le nostre macchine di riconoscimento dei modelli
+senza mai più interagire con l'ambiente.
+Poiché tutto l'apprendimento avviene
+dopo che l'algoritmo è disconnesso dall'ambiente,
+questo è talvolta chiamato *apprendimento offline*.
+Per l'apprendimento supervisionato,
+il processo considerando la raccolta di dati da un ambiente assomiglia a :numref:`fig_data_collection`.
 
-![Collecting data for supervised learning from an environment.](../img/data-collection.svg)
+Raccolta di dati per l'apprendimento supervisionato da un ambiente](../img/data-collection.svg)
 :label:`fig_data_collection`
 
-This simplicity of offline learning has its charms.
-The upside is that
-we can worry about pattern recognition
-in isolation, without any distraction from these other problems.
-But the downside is that the problem formulation is quite limiting.
-If you are more ambitious, or if you grew up reading Asimov's Robot series,
-then you might imagine artificially intelligent bots capable
-not only of making predictions, but also 
-of taking actions in the world.
-We want to think about intelligent *agents*, not just predictive models.
-This means that
-we need to think about choosing *actions*,
-not just making predictions.
-Moreover, unlike predictions,
-actions actually impact the environment.
-If we want to train an intelligent agent,
-we must account for the way its actions might
-impact the future observations of the agent.
+Questa semplicità dell'apprendimento offline ha il suo fascino.
+Il lato positivo è che
+possiamo preoccuparci del riconoscimento dei modelli
+in isolamento, senza alcuna distrazione da questi altri problemi.
+Ma il lato negativo è che la formulazione del problema è piuttosto limitante.
+Se siete più ambiziosi, o se siete cresciuti leggendo la serie dei Robot di Asimov,
+allora potreste immaginare bot artificialmente intelligenti capaci
+non solo di fare previsioni, ma anche 
+di compiere azioni nel mondo.
+Vogliamo pensare ad *agenti* intelligenti, non solo a modelli predittivi.
+Questo significa che
+dobbiamo pensare a scegliere *azioni*,
+non solo a fare previsioni.
+Inoltre, a differenza delle previsioni,
+le azioni hanno un impatto effettivo sull'ambiente.
+Se vogliamo addestrare un agente intelligente,
+dobbiamo tenere conto del modo in cui le sue azioni potrebbero
+avere un impatto sulle future osservazioni dell'agente.
 
-Considering the interaction with an environment
-opens a whole set of new modeling questions.
-The following are just a few examples.
+Considerare l'interazione con un ambiente
+apre tutta una serie di nuove domande di modellazione.
+I seguenti sono solo alcuni esempi.
 
-* Does the environment remember what we did previously?
-* Does the environment want to help us, e.g., a user reading text into a speech recognizer?
-* Does the environment want to beat us, i.e., an adversarial setting like spam filtering (against spammers) or playing a game (vs. an opponent)?
-* Does the environment not care?
-* Does the environment have shifting dynamics? For example, does future data always resemble the past or do the patterns change over time, either naturally or in response to our automated tools?
+* L'ambiente ricorda cosa abbiamo fatto in precedenza?
+* L'ambiente vuole aiutarci, per esempio un utente che legge un testo in un riconoscitore vocale?
+* L'ambiente vuole batterci, ad esempio in un contesto conflittuale come il filtraggio dello spam (contro gli spammer) o un gioco (contro un avversario)?
+* All'ambiente non interessa?
+* L'ambiente ha dinamiche mutevoli? Per esempio, i dati futuri assomigliano sempre al passato o i modelli cambiano nel tempo, naturalmente o in risposta ai nostri strumenti automatici?
 
-This last question raises the problem of *distribution shift*,
-when training and test data are different.
-It is a problem that most of us have experienced
-when taking exams written by a lecturer,
-while the homework was composed by his teaching assistants.
-Next, we will briefly describe reinforcement learning,
-a setting that explicitly considers interactions with an environment.
+Quest'ultima domanda solleva il problema dello *spostamento della distribuzione*,
+quando i dati di allenamento e quelli di test sono diversi.
+È un problema che la maggior parte di noi ha sperimentato
+quando si fanno esami scritti da un docente,
+mentre i compiti erano stati composti dai suoi assistenti.
+In seguito, descriveremo brevemente l'apprendimento per rinforzo,
+un'impostazione che considera esplicitamente le interazioni con un ambiente.
 
-### Reinforcement Learning
+### Apprendimento per rinforzo
 
-If you are interested in using machine learning
-to develop an agent that interacts with an environment
-and takes actions, then you are probably going to wind up
-focusing on *reinforcement learning*.
-This might include applications to robotics,
-to dialogue systems, 
-and even to developing artificial intelligence (AI)
-for video games.
-*Deep reinforcement learning*, which applies
-deep learning to reinforcement learning problems,
-has surged in popularity.
-The breakthrough deep Q-network that beat humans at Atari games using only the visual input,
-and the AlphaGo program that dethroned the world champion at the board game Go are two prominent examples.
+Se siete interessati ad usare l'apprendimento automatico
+per sviluppare un agente che interagisce con un ambiente
+e compie azioni, allora probabilmente finirete per
+concentrarsi sull'*apprendimento per rinforzo*.
+Questo potrebbe includere applicazioni alla robotica,
+ai sistemi di dialogo, 
+e persino allo sviluppo di intelligenza artificiale (AI)
+per i videogiochi.
+*Apprendimento per rinforzo profondo*, che applica
+l'apprendimento profondo ai problemi di apprendimento per rinforzo,
+è cresciuto in popolarità.
+La rivoluzionaria rete Q profonda che ha battuto gli umani ai giochi Atari usando solo l'input visivo,
+e il programma AlphaGo che ha detronizzato il campione del mondo del gioco da tavolo Go sono due esempi importanti.
 
-Reinforcement learning gives a very general statement of a problem,
-in which an agent interacts with an environment over a series of time steps.
-At each time step, 
-the agent receives some *observation* 
-from the environment and must choose an *action*
-that is subsequently transmitted back to the environment
-via some mechanism (sometimes called an actuator).
-Finally, the agent receives a reward from the environment.
-This process is illustrated in :numref:`fig_rl-environment`.
-The agent then receives a subsequent observation,
-and chooses a subsequent action, and so on.
-The behavior of a reinforcement learning agent is governed by a policy.
-In short, a *policy* is just a function that maps
-from observations of the environment to actions.
-The goal of reinforcement learning is to produce a good policy.
+L'apprendimento per rinforzo fornisce una dichiarazione molto generale di un problema,
+in cui un agente interagisce con un ambiente in una serie di passi temporali.
+Ad ogni passo temporale, 
+l'agente riceve qualche *osservazione* 
+dall'ambiente e deve scegliere un'azione
+che viene successivamente trasmessa all'ambiente
+attraverso qualche meccanismo (a volte chiamato attuatore).
+Infine, l'agente riceve una ricompensa dall'ambiente.
+Questo processo è illustrato in :numref:`fig_rl-ambiente`.
+L'agente riceve poi un'osservazione successiva,
+e sceglie un'azione successiva, e così via.
+Il comportamento di un agente di apprendimento per rinforzo è governato da una politica.
+In breve, una *politica* è solo una funzione che mappa
+dalle osservazioni dell'ambiente alle azioni.
+L'obiettivo dell'apprendimento per rinforzo è di produrre una buona politica.
 
-![The interaction between reinforcement learning and an environment.](../img/rl-environment.svg)
-:label:`fig_rl-environment`
+L'interazione tra l'apprendimento per rinforzo e un ambiente.](../img/rl-environment.svg)
+:label:`fig_rl-ambiente`
 
-It is hard to overstate the generality of the reinforcement learning framework.
-For example, we can cast any supervised learning problem as a reinforcement learning problem.
-Say we had a classification problem.
-We could create a reinforcement learning agent with one action corresponding to each class.
-We could then create an environment which gave a reward
-that was exactly equal to the loss function
-from the original supervised learning problem.
+E' difficile sopravvalutare la generalità della struttura dell'apprendimento per rinforzo.
+Per esempio, possiamo presentare qualsiasi problema di apprendimento supervisionato come un problema di apprendimento con rinforzo.
+Diciamo che abbiamo un problema di classificazione.
+Potremmo creare un agente di apprendimento per rinforzo con un'azione corrispondente ad ogni classe.
+Potremmo quindi creare un ambiente che dia una ricompensa
+che era esattamente uguale alla funzione di perdita
+del problema originale di apprendimento supervisionato.
 
-That being said, reinforcement learning can also address many problems
-that supervised learning cannot.
-For example, in supervised learning we always expect
-that the training input comes associated with the correct label.
-But in reinforcement learning, we do not assume that for each observation 
-the environment tells us the optimal action.
-In general, we just get some reward.
-Moreover, the environment may not even tell us which actions led to the reward.
+Detto questo, l'apprendimento per rinforzo può anche affrontare molti problemi
+che l'apprendimento supervisionato non può affrontare.
+Per esempio, nell'apprendimento supervisionato ci aspettiamo sempre
+che l'input di addestramento venga associato all'etichetta corretta.
+Ma nell'apprendimento per rinforzo, non assumiamo che per ogni osservazione 
+l'ambiente ci dica l'azione ottimale.
+In generale, otteniamo solo una ricompensa.
+Inoltre, l'ambiente può anche non dirci quali azioni hanno portato alla ricompensa.
 
-Consider for example the game of chess.
-The only real reward signal comes at the end of the game
-when we either win, which we might assign a reward of 1,
-or when we lose, which we could assign a reward of -1.
-So reinforcement learners must deal with the *credit assignment* problem:
-determining which actions to credit or blame for an outcome.
-The same goes for an employee who gets a promotion on October 11.
-That promotion likely reflects a large number
-of well-chosen actions over the previous year.
-Getting more promotions in the future requires figuring out
-what actions along the way led to the promotion.
+Consideriamo per esempio il gioco degli scacchi.
+L'unico vero segnale di ricompensa arriva alla fine del gioco
+quando vinciamo, a cui potremmo assegnare una ricompensa di 1,
+o quando perdiamo, a cui potremmo assegnare una ricompensa di -1.
+Quindi chi impara il rinforzo deve affrontare il problema dell'*assegnazione dei crediti*:
+determinare quali azioni accreditare o incolpare per un risultato.
+Lo stesso vale per un impiegato che ottiene una promozione l'11 ottobre.
+Quella promozione riflette probabilmente un gran numero
+di azioni ben scelte nel corso dell'anno precedente.
+Ottenere più promozioni in futuro richiede di capire
+quali azioni lungo il percorso hanno portato alla promozione.
 
-Reinforcement learners may also have to deal
-with the problem of partial observability.
-That is, the current observation might not
-tell you everything about your current state.
-Say a cleaning robot found itself trapped
-in one of many identical closets in a house.
-Inferring the precise location (and thus state) of the robot
-might require considering its previous observations before entering the closet.
+Chi impara con il rinforzo può anche avere a che fare
+con il problema dell'osservabilità parziale.
+Cioè, l'osservazione corrente potrebbe non
+dire tutto sul suo stato attuale.
+Supponiamo che un robot pulitore si trovi intrappolato
+in uno dei tanti armadi identici di una casa.
+Dedurre la posizione precisa (e quindi lo stato) del robot
+potrebbe richiedere di considerare le sue precedenti osservazioni prima di entrare nell'armadio.
 
-Finally, at any given point, reinforcement learners
-might know of one good policy,
-but there might be many other better policies
-that the agent has never tried.
-The reinforcement learner must constantly choose
-whether to *exploit* the best currently-known strategy as a policy,
-or to *explore* the space of strategies,
-potentially giving up some short-run reward in exchange for knowledge.
+Infine, in ogni dato punto, gli apprendisti di rinforzo
+potrebbero conoscere una buona politica,
+ma potrebbero esserci molte altre politiche migliori
+che l'agente non ha mai provato.
+L'apprendista di rinforzo deve costantemente scegliere
+se *sfruttare* la migliore strategia attualmente conosciuta come politica,
+o *esplorare* lo spazio delle strategie,
+potenzialmente rinunciando a qualche ricompensa a breve termine in cambio della conoscenza.
 
-The general reinforcement learning problem
-is a very general setting.
-Actions affect subsequent observations.
-Rewards are only observed corresponding to the chosen actions.
-The environment may be either fully or partially observed.
-Accounting for all this complexity at once may ask too much of researchers.
-Moreover, not every practical problem exhibits all this complexity.
-As a result, researchers have studied a number of
-special cases of reinforcement learning problems.
+Il problema generale di apprendimento per rinforzo
+è un'impostazione molto generale.
+Le azioni influenzano le osservazioni successive.
+Si osservano solo le ricompense corrispondenti alle azioni scelte.
+L'ambiente può essere completamente o parzialmente osservato.
+Tenere conto di tutta questa complessità in una volta sola può chiedere troppo ai ricercatori.
+Inoltre, non tutti i problemi pratici presentano tutta questa complessità.
+Di conseguenza, i ricercatori hanno studiato una serie di
+casi speciali di problemi di apprendimento per rinforzo.
 
-When the environment is fully observed,
-we call the reinforcement learning problem a *Markov decision process*.
-When the state does not depend on the previous actions,
-we call the problem a *contextual bandit problem*.
-When there is no state, just a set of available actions
-with initially unknown rewards, this problem
-is the classic *multi-armed bandit problem*.
+Quando l'ambiente è completamente osservato,
+chiamiamo il problema di apprendimento per rinforzo un *processo decisionale di Markov*.
+Quando lo stato non dipende dalle azioni precedenti,
+chiamiamo il problema un *problema del bandito contestuale*.
+Quando non c'è uno stato, ma solo un insieme di azioni disponibili
+con ricompense inizialmente sconosciute, questo problema
+è il classico *problema del bandito a più braccia*.
 
-## Roots
+## Radici
 
-We have just reviewed
-a small subset of problems that machine learning 
-can address.
-For a diverse set of machine learning problems,
-deep learning provides powerful tools for solving them.
-Although many deep learning methods
-are recent inventions,
-the core idea of programming with data and neural networks (names of many deep learning models)
-has been studied for centuries.
-In fact,
-humans have held the desire to analyze data
-and to predict future outcomes for long
-and much of natural science has its roots in this.
-For instance, the Bernoulli distribution is named after
-[Jacob Bernoulli (1655--1705)](https://en.wikipedia.org/wiki/Jacob_Bernoulli), and the Gaussian distribution was discovered
-by [Carl Friedrich Gauss (1777--1855)](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss).
-He invented, for instance, the least mean squares algorithm,
-which is still used today for countless problems
-from insurance calculations to medical diagnostics.
-These tools gave rise to an experimental approach
-in the natural sciences---for instance, Ohm's law
-relating current and voltage in a resistor
-is perfectly described by a linear model.
+Abbiamo appena esaminato
+un piccolo sottoinsieme di problemi che il machine learning 
+può affrontare.
+Per una serie diversificata di problemi di apprendimento automatico,
+l'apprendimento profondo fornisce potenti strumenti per risolverli.
+Anche se molti metodi di apprendimento profondo
+siano invenzioni recenti,
+l'idea di base della programmazione con dati e reti neurali (nomi di molti modelli di apprendimento profondo)
+è stata studiata per secoli.
+Infatti,
+gli esseri umani hanno avuto il desiderio di analizzare i dati
+e di prevedere i risultati futuri per molto tempo
+e gran parte delle scienze naturali ha le sue radici in questo.
+Per esempio, la distribuzione di Bernoulli prende il nome da
+[Jacob Bernoulli (1655--1705)](https://en.wikipedia.org/wiki/Jacob_Bernoulli), e la distribuzione Gaussiana fu scoperta
+da [Carl Friedrich Gauss (1777--1855)](https://en.wikipedia.org/wiki/Carl_Friedrich_Gauss).
+Egli inventò, per esempio, l'algoritmo dei minimi quadrati,
+che è usato ancora oggi per innumerevoli problemi
+dai calcoli assicurativi alla diagnostica medica.
+Questi strumenti hanno dato origine a un approccio sperimentale
+nelle scienze naturali--per esempio, la legge di Ohm
+che mette in relazione corrente e tensione in un resistore
+è perfettamente descritta da un modello lineare.
 
-Even in the middle ages, mathematicians had a keen intuition of estimates.
-For instance, the geometry book of [Jacob Köbel (1460--1533)](https://www.maa.org/press/periodicals/convergence/mathematical-treasures-jacob-kobels-geometry) illustrates
-averaging the length of 16 adult men's feet to obtain the average foot length.
+Anche nel Medioevo, i matematici avevano un'intuizione acuta delle stime.
+Per esempio, il libro di geometria di [Jacob Köbel (1460--1533)](https://www.maa.org/press/periodicals/convergence/mathematical-treasures-jacob-kobels-geometry) illustra
+la media della lunghezza di 16 piedi di uomini adulti per ottenere la lunghezza media del piede.
 
-![Estimating the length of a foot.](../img/koebel.jpg)
+Stimare la lunghezza di un piede](../img/koebel.jpg)
 :width:`500px`
 :label:`fig_koebel`
 
-:numref:`fig_koebel` illustrates how this estimator works.
-The 16 adult men were asked to line up in a row, when leaving the church.
-Their aggregate length was then divided by 16
-to obtain an estimate for what now amounts to 1 foot.
-This "algorithm" was later improved to deal with misshapen feet---the
-2 men with the shortest and longest feet respectively were sent away,
-averaging only over the remainder.
-This is one of the earliest examples of the trimmed mean estimate.
+:numref:`fig_koebel` illustra come funziona questo stimatore.
+Ai 16 uomini adulti è stato chiesto di mettersi in fila all'uscita dalla chiesa.
+La loro lunghezza complessiva è stata poi divisa per 16
+per ottenere una stima di ciò che ora ammonta a 1 piede.
+Questo "algoritmo" è stato successivamente migliorato per trattare con i piedi deformi - i
+I 2 uomini con i piedi più corti e più lunghi rispettivamente furono mandati via,
+facendo una media solo sul resto.
+Questo è uno dei primi esempi di stima della media tagliata.
 
-Statistics really took off with the collection and availability of data.
-One of its titans, [Ronald Fisher (1890--1962)](https://en.wikipedia.org/wiki/Ronald_Fisher),
-contributed significantly to its theory
-and also its applications in genetics.
-Many of his algorithms (such as linear discriminant analysis)
-and formula (such as the Fisher information matrix)
-are still in frequent use today. 
-In fact,
-even the Iris dataset
-that Fisher released in 1936 is still used sometimes
-to illustrate machine learning algorithms.
-He was also a proponent of eugenics,
-which should remind us that the morally dubious use of data science
-has as long and enduring a history as its productive use
-in industry and the natural sciences.
+La statistica è veramente decollata con la raccolta e la disponibilità di dati.
+Uno dei suoi titani, [Ronald Fisher (1890--1962)](https://en.wikipedia.org/wiki/Ronald_Fisher),
+ha contribuito significativamente alla sua teoria
+e anche alle sue applicazioni nella genetica.
+Molti dei suoi algoritmi (come l'analisi discriminante lineare)
+e formula (come la matrice di informazione di Fisher)
+sono ancora oggi di uso frequente. 
+Infatti,
+anche il set di dati Iris
+che Fisher rilasciò nel 1936 è ancora usato a volte
+per illustrare gli algoritmi di apprendimento automatico.
+Era anche un sostenitore dell'eugenetica,
+il che dovrebbe ricordarci che l'uso moralmente dubbio della scienza dei dati
+ha una storia lunga e duratura quanto il suo uso produttivo
+nell'industria e nelle scienze naturali.
 
-A second influence for machine learning came from information theory by
-[Claude Shannon (1916--2001)](https://en.wikipedia.org/wiki/Claude_Shannon) and the theory of computation via [Alan Turing (1912--1954)](https://en.wikipedia.org/wiki/Alan_Turing).
-Turing posed the question "can machines think?”
-in his famous paper *Computing Machinery and Intelligence* :cite:`Turing.1950`.
-In what he described as the Turing test, a machine
-can be considered *intelligent* if it is difficult
-for a human evaluator to distinguish between the replies
-from a machine and a human based on textual interactions.
+Una seconda influenza per l'apprendimento automatico venne dalla teoria dell'informazione di
+[Claude Shannon (1916--2001)](https://en.wikipedia.org/wiki/Claude_Shannon) e dalla teoria della computazione di [Alan Turing (1912--1954)](https://en.wikipedia.org/wiki/Alan_Turing).
+Turing pose la domanda "le macchine possono pensare?
+nel suo famoso documento *Computing Machinery and Intelligence* :cite:`Turing.1950`.
+In quello che ha descritto come il test di Turing, una macchina
+può essere considerata *intelligente* se è difficile
+per un valutatore umano distinguere tra le risposte
+di una macchina e di un umano sulla base di interazioni testuali.
 
-Another influence can be found in neuroscience and psychology.
-After all, humans clearly exhibit intelligent behavior.
-It is thus only reasonable to ask whether one could explain
-and possibly reverse engineer this capacity.
-One of the oldest algorithms inspired in this fashion
-was formulated by [Donald Hebb (1904--1985)](https://en.wikipedia.org/wiki/Donald_O._Hebb).
-In his groundbreaking book *The Organization of Behavior* :cite:`Hebb.Hebb.1949`,
-he posited that neurons learn by positive reinforcement.
-This became known as the Hebbian learning rule.
-It is the prototype of Rosenblatt's perceptron learning algorithm
-and it laid the foundations of many stochastic gradient descent algorithms
-that underpin deep learning today: reinforce desirable behavior
-and diminish undesirable behavior to obtain good settings
-of the parameters in a neural network.
+Un'altra influenza può essere trovata nelle neuroscienze e nella psicologia.
+Dopo tutto, gli esseri umani mostrano chiaramente un comportamento intelligente.
+È quindi ragionevole chiedersi se si possa spiegare
+e possibilmente invertire questa capacità.
+Uno dei più vecchi algoritmi ispirati in questo modo
+è stato formulato da [Donald Hebb (1904--1985)](https://en.wikipedia.org/wiki/Donald_O._Hebb).
+Nel suo libro rivoluzionario *The Organization of Behavior* :cite:`Hebb.Hebb.1949`,
+ha postulato che i neuroni imparano tramite rinforzo positivo.
+Questo è diventato noto come la regola di apprendimento di Hebbian.
+È il prototipo dell'algoritmo di apprendimento del perceptron di Rosenblatt
+e ha gettato le basi di molti algoritmi di discesa del gradiente stocastico
+che oggi sono alla base dell'apprendimento profondo: rinforzare il comportamento desiderabile
+e diminuire il comportamento indesiderabile per ottenere buone impostazioni
+dei parametri in una rete neurale.
 
-Biological inspiration is what gave *neural networks* their name.
-For over a century (dating back to the models of Alexander Bain, 1873
-and James Sherrington, 1890), researchers have tried to assemble
-computational circuits that resemble networks of interacting neurons.
-Over time, the interpretation of biology has become less literal
-but the name stuck. At its heart, lie a few key principles
-that can be found in most networks today:
+L'ispirazione biologica è ciò che ha dato il nome alle *reti neurali*.
+Per oltre un secolo (risalente ai modelli di Alexander Bain, 1873
+e James Sherrington, 1890), i ricercatori hanno cercato di assemblare
+circuiti computazionali che assomigliano a reti di neuroni interagenti.
+Nel corso del tempo, l'interpretazione della biologia è diventata meno letterale
+ma il nome è rimasto. Al suo cuore, ci sono alcuni principi chiave
+che si possono trovare nella maggior parte delle reti oggi:
 
-* The alternation of linear and nonlinear processing units, often referred to as *layers*.
-* The use of the chain rule (also known as *backpropagation*) for adjusting parameters in the entire network at once.
+* L'alternanza di unità di elaborazione lineari e non lineari, spesso indicate come *strati*.
+* L'uso della regola della catena (conosciuta anche come *backpropagation*) per regolare i parametri dell'intera rete in una sola volta.
 
-After initial rapid progress, research in neural networks
-languished from around 1995 until 2005.
-This was mainly due to two reasons.
-First, training a network is computationally very expensive.
-While random-access memory was plentiful at the end of the past century,
-computational power was scarce.
-Second, datasets were relatively small.
-In fact, Fisher's Iris dataset from 1932
-was a popular tool for testing the efficacy of algorithms.
-The MNIST dataset with its 60000 handwritten digits was considered huge.
+Dopo un rapido progresso iniziale, la ricerca sulle reti neurali
+ha languito dal 1995 circa fino al 2005.
+Ciò era dovuto principalmente a due ragioni.
+Primo, l'addestramento di una rete è computazionalmente molto costoso.
+Mentre la memoria ad accesso casuale era abbondante alla fine del secolo scorso,
+la potenza di calcolo era scarsa.
+In secondo luogo, i set di dati erano relativamente piccoli.
+Infatti, il set di dati Iris di Fisher del 1932
+era uno strumento popolare per testare l'efficacia degli algoritmi.
+Il dataset MNIST con le sue 60000 cifre scritte a mano era considerato enorme.
 
-Given the scarcity of data and computation,
-strong statistical tools such as kernel methods,
-decision trees and graphical models proved empirically superior.
-Unlike neural networks, they did not require weeks to train
-and provided predictable results with strong theoretical guarantees.
+Data la scarsità di dati e di calcolo,
+strumenti statistici forti come i metodi kernel,
+alberi decisionali e modelli grafici si sono dimostrati empiricamente superiori.
+A differenza delle reti neurali, non hanno richiesto settimane di addestramento
+e fornivano risultati prevedibili con forti garanzie teoriche.
 
 
-## The Road to Deep Learning
+## La strada verso l'apprendimento profondo
 
-Much of this changed with 
-the ready availability of large amounts of data,
-due to the World Wide Web, 
-the advent of companies serving
-hundreds of millions of users online, 
-a dissemination of cheap, high-quality sensors, 
-cheap data storage (Kryder's law),
-and cheap computation (Moore's law), in particular in the form of GPUs, originally engineered for computer gaming.
-Suddenly algorithms and models that seemed computationally infeasible
-became relevant (and vice versa).
-This is best illustrated in :numref:`tab_intro_decade`.
+Molto di tutto questo è cambiato con 
+la pronta disponibilità di grandi quantità di dati,
+grazie al World Wide Web, 
+l'avvento delle aziende che servono
+centinaia di milioni di utenti online, 
+la diffusione di sensori economici e di alta qualità, 
+all'immagazzinamento di dati a basso costo (legge di Kryder),
+e calcolo a basso costo (legge di Moore), in particolare sotto forma di GPU, originariamente progettate per il gioco al computer.
+Improvvisamente gli algoritmi e i modelli che sembravano computazionalmente inapplicabili
+sono diventati rilevanti (e viceversa).
+Questo è meglio illustrato in :numref:`tab_intro_decade`.
 
-:Dataset vs. computer memory and computational power
+:Dataset vs. memoria del computer e potenza di calcolo
 
-|Decade|Dataset|Memory|Floating point calculations per second|
+|Decennio|Dataset|Memoria|Calcoli in virgola mobile al secondo
 |:--|:-|:-|:-|
 |1970|100 (Iris)|1 KB|100 KF (Intel 8080)|
-|1980|1 K (House prices in Boston)|100 KB|1 MF (Intel 80186)|
-|1990|10 K (optical character recognition)|10 MB|10 MF (Intel 80486)|
-|2000|10 M (web pages)|100 MB|1 GF (Intel Core)|
-|2010|10 G (advertising)|1 GB|1 TF (Nvidia C2050)|
+|1980|1 K (prezzi delle case a Boston)|100 KB|1 MF (Intel 80186)|
+|1990|10 K (riconoscimento ottico dei caratteri)|10 MB|10 MF (Intel 80486)|
+|2000|10 M (pagine web)|100 MB|1 GF (Intel Core)|
+|2010|10 G (pubblicità)|1 GB|1 TF (Nvidia C2050)|
 |2020|1 T (social network)|100 GB|1 PF (Nvidia DGX-2)|
 :label:`tab_intro_decade`
 
-It is evident that random-access memory has not kept pace with the growth in data.
-At the same time, the increase in computational power
-has outpaced that of the data available.
-This means that statistical models need to become more memory efficient
-(this is typically achieved by adding nonlinearities)
-while simultaneously being able to spend more time
-on optimizing these parameters, due to an increased computational budget.
-Consequently, the sweet spot in machine learning and statistics
-moved from (generalized) linear models and kernel methods to deep neural networks.
-This is also one of the reasons why many of the mainstays
-of deep learning, such as multilayer perceptrons
-:cite:`McCulloch.Pitts.1943`, convolutional neural networks
-:cite:`LeCun.Bottou.Bengio.ea.1998`, long short-term memory
+È evidente che la memoria ad accesso casuale non ha tenuto il passo con la crescita dei dati.
+Allo stesso tempo, l'aumento della potenza di calcolo
+ha superato quello dei dati disponibili.
+Questo significa che i modelli statistici devono diventare più efficienti dal punto di vista della memoria
+(questo si ottiene tipicamente aggiungendo delle non linearità)
+e contemporaneamente essere in grado di spendere più tempo
+sull'ottimizzazione di questi parametri, a causa di un maggiore budget computazionale.
+Di conseguenza, lo sweet spot nell'apprendimento automatico e nelle statistiche
+si è spostato dai modelli lineari (generalizzati) e dai metodi kernel alle reti neurali profonde.
+Questo è anche uno dei motivi per cui molti dei pilastri
+dell'apprendimento profondo, come i percettori multistrato
+:cite:`McCulloch.Pitts.1943`, le reti neurali convoluzionali
+:cite:`LeCun.Bottou.Bengio.ea.1998`, memoria a lungo termine
 :cite:`Hochreiter.Schmidhuber.1997`,
-and Q-Learning :cite:`Watkins.Dayan.1992`,
-were essentially "rediscovered" in the past decade,
-after laying comparatively dormant for considerable time.
+e Q-Learning :cite:`Watkins.Dayan.1992`,
+sono stati essenzialmente "riscoperti" nell'ultimo decennio,
+dopo essere rimasti relativamente dormienti per molto tempo.
 
-The recent progress in statistical models, applications, and algorithms
-has sometimes been likened to the Cambrian explosion:
-a moment of rapid progress in the evolution of species.
-Indeed, the state of the art is not just a mere consequence
-of available resources, applied to decades old algorithms.
-Note that the list below barely scratches the surface
-of the ideas that have helped researchers achieve tremendous progress
-over the past decade.
+Il recente progresso nei modelli statistici, nelle applicazioni e negli algoritmi
+è stato talvolta paragonato all'esplosione cambriana:
+un momento di rapido progresso nell'evoluzione delle specie.
+Infatti, lo stato dell'arte non è solo una mera conseguenza
+delle risorse disponibili, applicate ad algoritmi vecchi di decenni.
+Si noti che l'elenco che segue graffia appena la superficie
+delle idee che hanno aiutato i ricercatori a raggiungere progressi enormi
+nell'ultimo decennio.
 
 
-* Novel methods for capacity control, such as *dropout*
+* Nuovi metodi per il controllo della capacità, come il *dropout*.
   :cite:`Srivastava.Hinton.Krizhevsky.ea.2014`,
-  have helped to mitigate the danger of overfitting.
-  This was achieved by applying noise injection :cite:`Bishop.1995`
-  throughout the neural network, replacing weights by random variables
-  for training purposes.
-* Attention mechanisms solved a second problem
-  that had plagued statistics for over a century:
-  how to increase the memory and complexity of a system without
-  increasing the number of learnable parameters.
-  Researchers found an elegant solution
-  by using what can only be viewed as a learnable pointer structure :cite:`Bahdanau.Cho.Bengio.2014`.
-  Rather than having to remember an entire text sequence, e.g.,
-  for machine translation in a fixed-dimensional representation,
-  all that needed to be stored was a pointer to the intermediate state
-  of the translation process. This allowed for significantly
-  increased accuracy for long sequences, since the model
-  no longer needed to remember the entire sequence before
-  commencing the generation of a new sequence.
-* Multi-stage designs, e.g., via the memory networks 
-  :cite:`Sukhbaatar.Weston.Fergus.ea.2015` and the neural programmer-interpreter :cite:`Reed.De-Freitas.2015`
-  allowed statistical modelers to describe iterative approaches to reasoning. These tools allow for an internal state of the deep neural network
-  to be modified repeatedly, thus carrying out subsequent steps
-  in a chain of reasoning, similar to how a processor
-  can modify memory for a computation.
-* Another key development was the invention of generative adversarial networks
+  hanno contribuito a mitigare il pericolo di overfitting.
+  Questo è stato ottenuto applicando l'iniezione di rumore :cite:`Bishop.1995`
+  in tutta la rete neurale, sostituendo i pesi con variabili casuali
+  ai fini dell'addestramento.
+* I meccanismi di attenzione hanno risolto un secondo problema
+  che aveva afflitto la statistica per oltre un secolo:
+  come aumentare la memoria e la complessità di un sistema senza
+  aumentare il numero di parametri apprendibili.
+  I ricercatori hanno trovato una soluzione elegante
+  utilizzando ciò che può essere visto solo come una struttura di puntatori imparabile :cite:`Bahdanau.Cho.Bengio.2014`.
+  Piuttosto che dover ricordare un'intera sequenza di testo, ad es,
+  per la traduzione automatica in una rappresentazione a dimensione fissa,
+  tutto ciò che doveva essere memorizzato era un puntatore allo stato intermedio
+  del processo di traduzione. Questo ha permesso di aumentare significativamente
+  una maggiore accuratezza per le sequenze lunghe, poiché il modello
+  non aveva più bisogno di ricordare l'intera sequenza prima di
+  iniziare la generazione di una nuova sequenza.
+* Disegni a più stadi, per esempio, attraverso le reti di memoria 
+  :cite:`Sukhbaatar.Weston.Fergus.ea.2015` e il programmatore-interprete neurale :cite:`Reed.De-Freitas.2015`
+  hanno permesso ai modellatori statistici di descrivere approcci iterativi al ragionamento. Questi strumenti permettono che uno stato interno della rete neurale profonda
+  essere modificato ripetutamente, eseguendo così i passi successivi
+  in una catena di ragionamento, simile a come un processore
+  può modificare la memoria per una computazione.
+* Un altro sviluppo chiave è stata l'invenzione delle reti avversarie generative
   :cite:`Goodfellow.Pouget-Abadie.Mirza.ea.2014`.
-  Traditionally, statistical methods for density estimation
-  and generative models focused on finding proper probability distributions
-  and (often approximate) algorithms for sampling from them.
-  As a result, these algorithms were largely limited by the lack of
-  flexibility inherent in the statistical models.
-  The crucial innovation in generative adversarial networks was to replace the sampler
-  by an arbitrary algorithm with differentiable parameters.
-  These are then adjusted in such a way that the discriminator
-  (effectively a two-sample test) cannot distinguish fake from real data.
-  Through the ability to use arbitrary algorithms to generate data,
-  it opened up density estimation to a wide variety of techniques.
-  Examples of galloping Zebras :cite:`Zhu.Park.Isola.ea.2017`
-  and of fake celebrity faces :cite:`Karras.Aila.Laine.ea.2017`
-  are both testimony to this progress.
-  Even amateur doodlers can produce
-  photorealistic images based on just sketches that describe
-  how the layout of a scene looks like :cite:`Park.Liu.Wang.ea.2019`.
-* In many cases, a single GPU is insufficient to process
-  the large amounts of data available for training.
-  Over the past decade the ability to build parallel and
-  distributed training algorithms has improved significantly.
-  One of the key challenges in designing scalable algorithms
-  is that the workhorse of deep learning optimization,
-  stochastic gradient descent, relies on relatively
-  small minibatches of data to be processed.
-  At the same time, small batches limit the efficiency of GPUs.
-  Hence, training on 1024 GPUs with a minibatch size of,
-  say 32 images per batch amounts to an aggregate minibatch
-  of about 32000 images. Recent work, first by :cite:`Li.2017`,
-  and subsequently by :cite:`You.Gitman.Ginsburg.2017`
-  and :cite:`Jia.Song.He.ea.2018` pushed the size up to 64000 observations,
-  reducing training time for the ResNet-50 model on the ImageNet dataset to less than 7 minutes.
-  For comparison---initially training times were measured in the order of days.
-* The ability to parallelize computation has also contributed quite crucially
-  to progress in reinforcement learning, at least whenever simulation is an
-  option. This has led to significant progress in computers achieving
-  superhuman performance in Go, Atari games, Starcraft, and in physics
-  simulations (e.g., using MuJoCo). See e.g.,
-  :cite:`Silver.Huang.Maddison.ea.2016` for a description
-  of how to achieve this in AlphaGo. In a nutshell,
-  reinforcement learning works best if plenty of (state, action, reward) triples are available, i.e., whenever it is possible to try out lots of things to learn how they relate to each
-  other. Simulation provides such an avenue.
-* Deep learning frameworks have played a crucial role
-  in disseminating ideas. The first generation of frameworks
-  allowing for easy modeling encompassed
+  Tradizionalmente, i metodi statistici per la stima della densità
+  e i modelli generativi si concentravano sulla ricerca di adeguate distribuzioni di probabilità
+  e su algoritmi (spesso approssimativi) per il campionamento da esse.
+  Di conseguenza, questi algoritmi erano in gran parte limitati dalla mancanza di
+  flessibilità inerente ai modelli statistici.
+  L'innovazione cruciale nelle reti avversarie generative è stata quella di sostituire il campionatore
+  da un algoritmo arbitrario con parametri differenziabili.
+  Questi sono poi regolati in modo tale che il discriminatore
+  (effettivamente un test a due campioni) non può distinguere i dati falsi da quelli reali.
+  Attraverso la capacità di utilizzare algoritmi arbitrari per generare dati,
+  ha aperto la stima della densità a un'ampia varietà di tecniche.
+  Esempi di zebre al galoppo :cite:`Zhu.Park.Isola.ea.2017`
+  e di falsi volti di celebrità :cite:`Karras.Aila.Laine.ea.2017`.
+  sono entrambi testimonianza di questo progresso.
+  Anche gli scarabocchiatori dilettanti possono produrre
+  immagini fotorealistiche basate solo su schizzi che descrivono
+  come appare il layout di una scena :cite:`Park.Liu.Wang.ea.2019`.
+* In molti casi, una singola GPU è insufficiente per elaborare
+  le grandi quantità di dati disponibili per la formazione.
+  Nell'ultimo decennio la capacità di costruire algoritmi paralleli e
+  algoritmi di addestramento distribuiti è migliorata notevolmente.
+  Una delle sfide chiave nella progettazione di algoritmi scalabili
+  è che il cavallo di battaglia dell'ottimizzazione dell'apprendimento profondo,
+  la discesa del gradiente stocastico, si basa su relativamente
+  piccoli minibatch di dati da elaborare.
+  Allo stesso tempo, i piccoli lotti limitano l'efficienza delle GPU.
+  Quindi, l'addestramento su 1024 GPU con una dimensione minibatch di,
+  diciamo 32 immagini per batch ammonta a un minibatch aggregato
+  di circa 32000 immagini. Lavori recenti, prima da :cite:`Li.2017`,
+  e successivamente da :cite:`You.Gitman.Ginsburg.2017`
+  e :cite:`Jia.Song.He.ea.2018` hanno spinto la dimensione fino a 64000 osservazioni,
+  riducendo il tempo di addestramento del modello ResNet-50 sul set di dati ImageNet a meno di 7 minuti.
+  Per confronto - inizialmente i tempi di addestramento erano misurati nell'ordine dei giorni.
+* La capacità di parallelizzare i calcoli ha anche contribuito in modo cruciale
+  al progresso nell'apprendimento per rinforzo, almeno quando la simulazione è un'opzione
+  un'opzione. Questo ha portato a progressi significativi nei computer che raggiungono
+  prestazioni sovrumane nel Go, nei giochi Atari, in Starcraft, e nelle simulazioni fisiche
+  simulazioni fisiche (ad esempio, usando MuJoCo). Vedi ad esempio,
+  :cite:`Silver.Huang.Maddison.ea.2016` per una descrizione
+  di come raggiungere questo obiettivo in AlphaGo. In poche parole,
+  l'apprendimento per rinforzo funziona meglio se sono disponibili molte triple (stato, azione, ricompensa), cioè quando è possibile provare molte cose per imparare come si relazionano
+  l'una con l'altra. La simulazione fornisce una tale strada.
+* I quadri di apprendimento profondo hanno giocato un ruolo cruciale
+  nella diffusione delle idee. La prima generazione di framework
+  che permette una facile modellazione comprendeva
   [Caffe](https://github.com/BVLC/caffe),
-  [Torch](https://github.com/torch), and
+  [Torch](https://github.com/torch), e
   [Theano](https://github.com/Theano/Theano).
-  Many seminal papers were written using these tools.
-  By now, they have been superseded by
-  [TensorFlow](https://github.com/tensorflow/tensorflow) (often used via its high level API [Keras](https://github.com/keras-team/keras)), [CNTK](https://github.com/Microsoft/CNTK), [Caffe 2](https://github.com/caffe2/caffe2), and [Apache MXNet](https://github.com/apache/incubator-mxnet). The third generation of tools, namely imperative tools for deep learning,
-  was arguably spearheaded by [Chainer](https://github.com/chainer/chainer),
-  which used a syntax similar to Python NumPy to describe models.
-  This idea was adopted by both [PyTorch](https://github.com/pytorch/pytorch),
-  the [Gluon API](https://github.com/apache/incubator-mxnet) of MXNet, and [Jax](https://github.com/google/jax).
+  Molti articoli seminali sono stati scritti usando questi strumenti.
+  Ora, sono stati sostituiti da
+  [TensorFlow](https://github.com/tensorflow/tensorflow) (spesso usato tramite la sua API di alto livello [Keras](https://github.com/keras-team/keras)), [CNTK](https://github.com/Microsoft/CNTK), [Caffe 2](https://github.com/caffe2/caffe2), e [Apache MXNet](https://github.com/apache/incubator-mxnet). La terza generazione di strumenti, cioè strumenti imperativi per l'apprendimento profondo,
+  è stato probabilmente guidato da [Chainer](https://github.com/chainer/chainer),
+  che ha usato una sintassi simile a Python NumPy per descrivere i modelli.
+  Questa idea è stata adottata sia da [PyTorch](https://github.com/pytorch/pytorch),
+  la [Gluon API](https://github.com/apache/incubator-mxnet) di MXNet, e [Jax](https://github.com/google/jax).
 
 
-The division of labor between system researchers building better tools
-and statistical modelers building better neural networks
-has greatly simplified things. For instance,
-training a linear logistic regression model
-used to be a nontrivial homework problem,
-worthy to give to new machine learning
-Ph.D. students at Carnegie Mellon University in 2014.
-By now, this task can be accomplished with less than 10 lines of code,
-putting it firmly into the grasp of programmers.
+La divisione del lavoro tra i ricercatori di sistema che costruiscono strumenti migliori
+e i modellatori statistici che costruiscono reti neurali migliori
+ha notevolmente semplificato le cose. Per esempio,
+addestrare un modello di regressione logistica lineare
+era un problema di compiti non banale,
+degno di essere dato ai nuovi studenti di
+studenti di dottorato alla Carnegie Mellon University nel 2014.
+Ora, questo compito può essere realizzato con meno di 10 righe di codice,
+mettendolo saldamente alla portata dei programmatori.
 
-## Success Stories
+## Storie di successo
 
-AI has a long history of delivering results
-that would be difficult to accomplish otherwise.
-For instance, 
-the mail sorting systems
-using optical character recognition
-have been deployed since the 1990s.
-This is, after all, the source of the famous MNIST dataset  of handwritten digits.
-The same applies to reading checks for bank deposits and scoring
-creditworthiness of applicants.
-Financial transactions are checked for fraud automatically.
-This forms the backbone of many e-commerce payment systems,
-such as PayPal, Stripe, AliPay, WeChat, Apple, Visa, and MasterCard.
-Computer programs for chess have been competitive for decades.
-Machine learning feeds search, recommendation, personalization,
-and ranking on the Internet.
-In other words, machine learning is pervasive, albeit often hidden from sight.
+L'IA ha una lunga storia di risultati
+che sarebbero difficili da ottenere altrimenti.
+Per esempio, 
+i sistemi di smistamento della posta
+che utilizzano il riconoscimento ottico dei caratteri
+sono stati impiegati fin dagli anni '90.
+Questa è, dopo tutto, la fonte del famoso dataset MNIST di cifre scritte a mano.
+Lo stesso vale per la lettura degli assegni per i depositi bancari e il punteggio
+la solvibilità dei richiedenti.
+Le transazioni finanziarie sono controllate automaticamente per le frodi.
+Questo costituisce la spina dorsale di molti sistemi di pagamento e-commerce,
+come PayPal, Stripe, AliPay, WeChat, Apple, Visa e MasterCard.
+I programmi informatici per gli scacchi sono stati competitivi per decenni.
+L'apprendimento automatico alimenta la ricerca, la raccomandazione, la personalizzazione,
+e il ranking su Internet.
+In altre parole, il machine learning è pervasivo, anche se spesso nascosto alla vista.
 
-It is only recently that AI
-has been in the limelight, mostly due to
-solutions to problems
-that were considered intractable previously
-and that are directly related to consumers.
-Many of such advances are attributed to deep learning.
+È solo di recente che l'AI
+è stata alla ribalta, soprattutto a causa di
+soluzioni a problemi
+che prima erano considerati intrattabili
+e che sono direttamente collegati ai consumatori.
+Molti di questi progressi sono attribuiti al deep learning.
 
-* Intelligent assistants, such as Apple's Siri, Amazon's Alexa, and Google's
-  assistant, are able to answer spoken questions with a reasonable degree of
-  accuracy. This includes menial tasks such as turning on light switches (a boon to the disabled) up to making barber's appointments and offering phone support dialog. This is likely the most noticeable sign that AI is affecting our lives.
-* A key ingredient in digital assistants is the ability to recognize speech
-  accurately. Gradually the accuracy of such systems has increased to the point
-  where they reach human parity for certain
-  applications :cite:`Xiong.Wu.Alleva.ea.2018`.
-* Object recognition likewise has come a long way. Estimating the object in a
-  picture was a fairly challenging task in 2010. On the ImageNet benchmark researchers from NEC Labs and University of Illinois at Urbana-Champaign achieved a top-5 error rate of 28% :cite:`Lin.Lv.Zhu.ea.2010`. By 2017,
-  this error rate was reduced to 2.25% :cite:`Hu.Shen.Sun.2018`. Similarly, stunning
-  results have been achieved for identifying birds or diagnosing skin cancer.
-* Games used to be a bastion of human intelligence.
-  Starting from TD-Gammon, a program for playing backgammon using temporal difference reinforcement learning, algorithmic and computational progress has led to algorithms
-  for a wide range of applications. Unlike backgammon,
-  chess has a much more complex state space and set of actions.
-  DeepBlue beat Garry Kasparov using massive parallelism,
-  special-purpose hardware and efficient search through the game tree :cite:`Campbell.Hoane-Jr.Hsu.2002`.
-  Go is more difficult still, due to its huge state space.
-  AlphaGo reached human parity in 2015, using deep learning combined with Monte Carlo tree sampling :cite:`Silver.Huang.Maddison.ea.2016`.
-  The challenge in Poker was that the state space is
-  large and it is not fully observed (we do not know the opponents'
-  cards). Libratus exceeded human performance in Poker using efficiently
-  structured strategies :cite:`Brown.Sandholm.2017`.
-  This illustrates the impressive progress in games
-  and the fact that advanced algorithms played a crucial part in them.
-* Another indication of progress in AI is the advent of self-driving cars
-  and trucks. While full autonomy is not quite within reach yet,
-  excellent progress has been made in this direction,
-  with companies such as Tesla, NVIDIA,
-  and Waymo shipping products that enable at least partial autonomy.
-  What makes full autonomy so challenging is that proper driving
-  requires the ability to perceive, to reason and to incorporate rules
-  into a system. At present, deep learning is used primarily
-  in the computer vision aspect of these problems.
-  The rest is heavily tuned by engineers.
-
-
-
-Again, the above list barely scratches the surface of where machine learning has impacted practical applications. For instance, robotics, logistics, computational biology, particle physics, and astronomy owe some of their most impressive recent advances at least in parts to machine learning. Machine learning is thus becoming a ubiquitous tool for engineers and scientists.
-
-Frequently, the question of the AI apocalypse, or the AI singularity
-has been raised in non-technical articles on AI.
-The fear is that somehow machine learning systems
-will become sentient and decide independently from their programmers
-(and masters) about things that directly affect the livelihood of humans.
-To some extent, AI already affects the livelihood of humans
-in an immediate way:
-creditworthiness is assessed automatically,
-autopilots mostly navigate vehicles, decisions about
-whether to grant bail use statistical data as input.
-More frivolously, we can ask Alexa to switch on the coffee machine.
-
-Fortunately, we are far from a sentient AI system
-that is ready to manipulate its human creators (or burn their coffee).
-First, AI systems are engineered, trained and deployed in a specific,
-goal-oriented manner. While their behavior might give the illusion
-of general intelligence, it is a combination of rules, heuristics
-and statistical models that underlie the design.
-Second, at present tools for *artificial general intelligence*
-simply do not exist that are able to improve themselves,
-reason about themselves, and that are able to modify,
-extend, and improve their own architecture
-while trying to solve general tasks.
-
-A much more pressing concern is how AI is being used in our daily lives.
-It is likely that many menial tasks fulfilled by truck drivers
-and shop assistants can and will be automated.
-Farm robots will likely reduce the cost for organic farming
-but they will also automate harvesting operations.
-This phase of the industrial revolution
-may have profound consequences on large swaths of society,
-since truck drivers and shop assistants are some
-of the most common jobs in many countries.
-Furthermore, statistical models, when applied without care
-can lead to racial, gender, or age bias and raise
-reasonable concerns about procedural fairness
-if automated to drive consequential decisions.
-It is important to ensure that these algorithms are used with care.
-With what we know today, this strikes us a much more pressing concern
-than the potential of malevolent superintelligence to destroy humanity.
-
-
-## Characteristics
-
-Thus far, we have talked about machine learning broadly, which is both a branch of AI and an approach to AI.
-Though deep learning is a subset of machine learning,
-the dizzying set of algorithms and applications makes it difficult to assess what specifically the ingredients for deep learning might be. 
-This is as difficult as trying to pin down required ingredients for pizza since almost every component is substitutable.
-
-As we have described, machine learning can
-use data to learn transformations between inputs and outputs,
-such as transforming audio into text in speech recognition.
-In doing so, it is often necessary to represent data in a way suitable for algorithms to transform such representations into the output.
-*Deep learning* is *deep* in precisely the sense
-that its models
-learn many *layers* of transformations,
-where each layer offers the representation
-at one level.
-For example,
-layers near the input may represent 
-low-level details of the data,
-while layers closer to the classification output
-may represent more abstract concepts used for discrimination.
-Since *representation learning* aims at
-finding the representation itself,
-deep learning can be referred to as multi-level
-representation learning.
-
-The problems that we have discussed so far, such as learning
-from the raw audio signal, 
-the raw pixel values of images,
-or mapping between sentences of arbitrary lengths and
-their counterparts in foreign languages,
-are those
-where deep learning excels and where traditional 
-machine learning
-methods falter.
-It turns out that these many-layered models
-are capable of addressing low-level perceptual data
-in a way that previous tools could not.
-Arguably the most significant commonality in deep learning methods is the use of *end-to-end training*. 
-That is, rather than assembling a system based on components that are individually tuned, one builds the system and then tunes their performance jointly.
-For instance, in computer vision scientists used to separate the process of *feature engineering* from the process of building machine learning models. The Canny edge detector :cite:`Canny.1987` and Lowe's SIFT feature extractor :cite:`Lowe.2004` reigned supreme for over a decade as algorithms for mapping images into feature vectors.
-In bygone days, the crucial part of applying machine learning to these problems
-consisted of coming up with manually-engineered ways
-of transforming the data into some form amenable to shallow models.
-Unfortunately, there is only so little that humans can accomplish by ingenuity in comparison with a consistent evaluation over millions of choices carried out automatically by an algorithm.
-When deep learning took over,
-these feature extractors were replaced by automatically tuned filters, yielding superior accuracy.
-
-Thus,
-one key advantage of deep learning is that it replaces not
-only the shallow models at the end of traditional learning pipelines,
-but also the labor-intensive process of 
-feature engineering.
-Moreover, by replacing much of the domain-specific preprocessing,
-deep learning has eliminated many of the boundaries
-that previously separated computer vision, speech recognition,
-natural language processing, medical informatics, and other application areas,
-offering a unified set of tools for tackling diverse problems.
-
-Beyond end-to-end training, 
-we are experiencing a transition from parametric statistical descriptions to fully nonparametric models. When data is scarce, one needs to rely on simplifying assumptions about reality in order to obtain useful models. When data is abundant, this can be replaced by nonparametric models that fit reality more accurately. To some extent, this mirrors the progress that physics experienced in the middle of the previous century with the availability of computers. Rather than solving parametric approximations of how electrons behave by hand, one can now resort to numerical simulations of the associated partial differential equations. This has led to much more accurate models, albeit often at the expense of explainability.
-
-Another difference to previous work is the acceptance of suboptimal solutions, dealing with nonconvex nonlinear optimization problems, and the willingness to try things before proving them. This newfound empiricism in dealing with statistical problems, combined with a rapid influx of talent has led to rapid progress of practical algorithms, albeit in many cases at the expense of modifying and re-inventing tools that existed for decades.
-
-In the end, the deep learning community prides itself on sharing tools across academic and corporate boundaries, releasing many excellent libraries, statistical models, and trained networks as open source.
-It is in this spirit that the notebooks forming this book are freely available for distribution and use. We have worked hard to lower the barriers of access for everyone to learn about deep learning and we hope that our readers will benefit from this.
+* Gli assistenti intelligenti, come Siri di Apple, Alexa di Amazon e l'assistente di Google
+  Google, sono in grado di rispondere a domande parlate con un ragionevole grado di
+  accuratezza. Questo include compiti meniali come accendere gli interruttori della luce (una manna per i disabili) fino a prendere appuntamenti dal barbiere e offrire dialoghi di supporto telefonico. Questo è probabilmente il segno più evidente che l'IA sta influenzando le nostre vite.
+* Un ingrediente chiave negli assistenti digitali è la capacità di riconoscere il discorso
+  accuratamente. Gradualmente la precisione di tali sistemi è aumentata fino al punto
+  in cui raggiungono la parità umana per certe
+  applicazioni :cite:`Xiong.Wu.Alleva.ea.2018`.
+* Anche il riconoscimento degli oggetti ha fatto molta strada. Stimare l'oggetto in una
+  immagine era un compito abbastanza impegnativo nel 2010. Sul benchmark ImageNet i ricercatori di NEC Labs e dell'Università dell'Illinois a Urbana-Champaign hanno raggiunto un tasso di errore top-5 del 28% :cite:`Lin.Lv.Zhu.ea.2010`. Entro il 2017,
+  questo tasso di errore è stato ridotto al 2,25% :cite:`Hu.Shen.Sun.2018`. Allo stesso modo, risultati sorprendenti
+  risultati sono stati raggiunti per identificare gli uccelli o diagnosticare il cancro alla pelle.
+* I giochi erano un tempo un bastione dell'intelligenza umana.
+  A partire da TD-Gammon, un programma per giocare a backgammon utilizzando l'apprendimento di rinforzo della differenza temporale, il progresso algoritmico e computazionale ha portato ad algoritmi
+  per una vasta gamma di applicazioni. A differenza del backgammon,
+  gli scacchi hanno uno spazio di stato molto più complesso e un insieme di azioni.
+  DeepBlue ha battuto Garry Kasparov usando un parallelismo massiccio,
+  hardware speciale e una ricerca efficiente attraverso l'albero del gioco :cite:`Campbell.Hoane-Jr.Hsu.2002`.
+  Go è ancora più difficile, a causa del suo enorme spazio di stato.
+  AlphaGo ha raggiunto la parità umana nel 2015, utilizzando l'apprendimento profondo combinato con il campionamento dell'albero di Monte Carlo :cite:`Silver.Huang.Maddison.ea.2016`.
+  La sfida nel poker era che lo spazio di stato è
+  grande e non è completamente osservato (non conosciamo le carte degli
+  carte). Libratus ha superato le prestazioni umane nel poker usando efficientemente
+  strategie strutturate in modo efficiente :cite:`Brown.Sandholm.2017`.
+  Questo illustra l'impressionante progresso nei giochi
+  e il fatto che gli algoritmi avanzati hanno giocato un ruolo cruciale in essi.
+ * Un'altra indicazione del progresso dell'IA è l'avvento delle auto a guida autonoma
+  e camion. Mentre la piena autonomia non è ancora a portata di mano,
+  sono stati fatti ottimi progressi in questa direzione,
+  con aziende come Tesla, NVIDIA,
+  e Waymo che spediscono prodotti che permettono un'autonomia almeno parziale.
+  Ciò che rende la piena autonomia così impegnativa è che la guida corretta
+  richiede la capacità di percepire, ragionare e incorporare regole
+  in un sistema. Attualmente, l'apprendimento profondo è usato principalmente
+  nell'aspetto della visione artificiale di questi problemi.
+  Il resto è pesantemente messo a punto dagli ingegneri.
 
 
 
-## Summary
+Di nuovo, l'elenco di cui sopra graffia appena la superficie di dove l'apprendimento automatico ha avuto un impatto sulle applicazioni pratiche. Per esempio, la robotica, la logistica, la biologia computazionale, la fisica delle particelle e l'astronomia devono alcuni dei loro più impressionanti progressi recenti almeno in parte al machine learning. L'apprendimento automatico sta quindi diventando uno strumento onnipresente per ingegneri e scienziati.
 
-* Machine learning studies how computer systems can leverage experience (often data) to improve performance at specific tasks. It combines ideas from statistics, data mining, and optimization. Often, it is used as a means of implementing AI solutions.
-* As a class of machine learning, representational learning focuses on how to automatically find the appropriate way to represent data. Deep learning is multi-level representation learning through learning many layers of transformations.
-* Deep learning replaces not only the shallow models at the end of traditional machine learning pipelines, but also the labor-intensive process of feature engineering. 
-* Much of the recent progress in deep learning has been triggered by an abundance of data arising from cheap sensors and Internet-scale applications, and by significant progress in computation, mostly through GPUs.
-* Whole system optimization is a key component in obtaining high performance. The availability of efficient deep learning frameworks has made design and implementation of this significantly easier.
+Spesso, la questione dell'apocalisse dell'IA, o la singolarità dell'IA
+è stata sollevata in articoli non tecnici sull'IA.
+La paura è che in qualche modo i sistemi di apprendimento automatico
+diventino senzienti e decidano indipendentemente dai loro programmatori
+(e padroni) su cose che riguardano direttamente il sostentamento degli umani.
+In una certa misura, l'IA influenza già il sostentamento degli esseri umani
+in modo immediato:
+l'affidabilità creditizia viene valutata automaticamente,
+i piloti automatici per lo più navigano i veicoli, le decisioni
+se concedere la cauzione utilizzano dati statistici come input.
+Più frivolamente, possiamo chiedere ad Alexa di accendere la macchina del caffè.
 
-## Exercises
+Fortunatamente, siamo lontani da un sistema di IA senziente
+che sia pronto a manipolare i suoi creatori umani (o a bruciare il loro caffè).
+In primo luogo, i sistemi di IA sono progettati, addestrati e distribuiti in modo specifico,
+orientati all'obiettivo. Mentre il loro comportamento potrebbe dare l'illusione
+di intelligenza generale, è una combinazione di regole, euristiche
+e modelli statistici che sono alla base del design.
+In secondo luogo, attualmente non esistono strumenti di *intelligenza generale artificiale*
+semplicemente non esistono che siano in grado di migliorare se stessi,
+ragionare su se stessi, e che siano in grado di modificare,
+estendere e migliorare la propria architettura
+mentre cercano di risolvere compiti generali.
 
-1. Which parts of code that you are currently writing could be "learned", i.e., improved by learning and automatically determining design choices that are made in your code? Does your code include heuristic design choices?
-1. Which problems that you encounter have many examples for how to solve them, yet no specific way to automate them? These may be prime candidates for using deep learning.
-1. Viewing the development of AI as a new industrial revolution, what is the relationship between algorithms and data? Is it similar to steam engines and coal? What is the fundamental difference?
-1. Where else can you apply the end-to-end training approach, such as in :numref:`fig_ml_loop`, physics, engineering, and econometrics?
+Una preoccupazione molto più pressante è come l'IA viene utilizzata nella nostra vita quotidiana.
+È probabile che molti compiti umili svolti da autisti di camion
+e dai commessi dei negozi possono essere e saranno automatizzati.
+I robot agricoli probabilmente ridurranno il costo dell'agricoltura biologica
+ma automatizzeranno anche le operazioni di raccolta.
+Questa fase della rivoluzione industriale
+potrebbe avere profonde conseguenze su ampie fasce della società,
+dato che gli autisti di camion e i commessi sono alcuni
+dei lavori più comuni in molti paesi.
+Inoltre, i modelli statistici, se applicati senza cura
+possono portare a pregiudizi razziali, di genere o di età e sollevare
+ragionevoli preoccupazioni sull'equità procedurale
+se automatizzati per guidare decisioni consequenziali.
+È importante assicurare che questi algoritmi siano usati con cura.
+Con quello che sappiamo oggi, questa ci sembra una preoccupazione molto più pressante
+del potenziale di una superintelligenza malevola di distruggere l'umanità.
+
+
+## Caratteristiche
+
+Finora abbiamo parlato dell'apprendimento automatico in senso lato, che è sia una branca dell'IA che un approccio all'IA.
+Anche se l'apprendimento profondo è un sottoinsieme dell'apprendimento automatico,
+l'insieme vertiginoso di algoritmi e applicazioni rende difficile valutare quali siano specificamente gli ingredienti dell'apprendimento profondo. 
+Questo è difficile come cercare di individuare gli ingredienti necessari per la pizza, dato che quasi ogni componente è sostituibile.
+
+Come abbiamo descritto, l'apprendimento automatico può
+usare i dati per imparare trasformazioni tra gli input e gli output,
+come la trasformazione dell'audio in testo nel riconoscimento vocale.
+Nel fare ciò, è spesso necessario rappresentare i dati in un modo adatto agli algoritmi per trasformare tali rappresentazioni in output.
+Il *Deep learning* è *profondo* proprio nel senso
+che i suoi modelli
+imparano molti *strati* di trasformazioni,
+dove ogni strato offre la rappresentazione
+ad un livello.
+Per esempio,
+gli strati vicini all'input possono rappresentare 
+dettagli di basso livello dei dati,
+mentre gli strati più vicini all'output di classificazione
+possono rappresentare concetti più astratti utilizzati per la discriminazione.
+Poiché l'apprendimento delle rappresentazioni mira a
+trovare la rappresentazione stessa,
+l'apprendimento profondo può essere definito come apprendimento
+di rappresentazione.
+
+I problemi che abbiamo discusso finora, come l'apprendimento
+dal segnale audio grezzo, 
+i valori grezzi dei pixel delle immagini,
+o la mappatura tra frasi di lunghezza arbitraria e
+le loro controparti in lingue straniere,
+sono quelli
+dove il deep learning eccelle e dove il tradizionale 
+apprendimento automatico
+metodi tradizionali di apprendimento automatico vacillano.
+Si scopre che questi modelli a più livelli
+sono in grado di affrontare i dati percettivi di basso livello
+in un modo che gli strumenti precedenti non potevano.
+Probabilmente l'elemento comune più significativo nei metodi di apprendimento profondo è l'uso dell'addestramento *end-to-end*. 
+Cioè, piuttosto che assemblare un sistema basato su componenti che sono sintonizzati individualmente, si costruisce il sistema e poi si sintonizzano le loro prestazioni insieme.
+Per esempio, nella computer vision gli scienziati erano soliti separare il processo di *ingegneria delle caratteristiche* dal processo di costruzione dei modelli di apprendimento automatico. Il rilevatore di bordi Canny :cite:`Canny.1987` e l'estrattore di caratteristiche SIFT di Lowe :cite:`Lowe.2004` hanno regnato per oltre un decennio come algoritmi per la mappatura delle immagini in vettori di caratteristiche.
+In passato, la parte cruciale dell'applicazione dell'apprendimento automatico a questi problemi
+consisteva nel trovare modi ingegnerizzati manualmente
+di trasformare i dati in qualche forma adatta a modelli poco profondi.
+Sfortunatamente, c'è solo così poco che gli umani possono realizzare con l'ingegno in confronto ad una valutazione coerente su milioni di scelte effettuate automaticamente da un algoritmo.
+Quando l'apprendimento profondo ha preso il sopravvento,
+questi estrattori di caratteristiche sono stati sostituiti da filtri sintonizzati automaticamente, ottenendo una precisione superiore.
+
+Quindi,
+un vantaggio chiave dell'apprendimento profondo è che sostituisce non
+solo i modelli superficiali alla fine delle tradizionali pipeline di apprendimento,
+ma anche l'impegnativo processo di 
+dell'ingegneria delle caratteristiche.
+Inoltre, sostituendo gran parte della pre-elaborazione specifica del dominio,
+l'apprendimento profondo ha eliminato molti dei confini
+che prima separavano la visione artificiale, il riconoscimento vocale,
+l'elaborazione del linguaggio naturale, l'informatica medica e altre aree di applicazione,
+offrendo un insieme unificato di strumenti per affrontare problemi diversi.
+
+Al di là della formazione end-to-end, 
+stiamo vivendo una transizione dalle descrizioni statistiche parametriche a modelli completamente non parametrici. Quando i dati sono scarsi, si deve fare affidamento su ipotesi semplificative sulla realtà per ottenere modelli utili. Quando i dati sono abbondanti, questo può essere sostituito da modelli non parametrici che si adattano alla realtà in modo più accurato. In una certa misura, questo rispecchia il progresso che la fisica ha sperimentato nella metà del secolo scorso con la disponibilità dei computer. Piuttosto che risolvere a mano le approssimazioni parametriche del comportamento degli elettroni, si può ora ricorrere a simulazioni numeriche delle equazioni differenziali parziali associate. Questo ha portato a modelli molto più accurati, anche se spesso a spese della spiegabilità.
+
+Un'altra differenza rispetto al lavoro precedente è l'accettazione di soluzioni subottimali, la gestione di problemi di ottimizzazione non lineari non convessi e la volontà di provare le cose prima di provarle. Questo ritrovato empirismo nell'affrontare i problemi statistici, combinato con un rapido afflusso di talenti ha portato ad un rapido progresso degli algoritmi pratici, anche se in molti casi a spese della modifica e reinvenzione di strumenti che esistevano da decenni.
+
+Alla fine, la comunità del deep learning è orgogliosa di condividere strumenti oltre i confini accademici e aziendali, rilasciando molte librerie eccellenti, modelli statistici e reti addestrate come open source.
+È in questo spirito che i quaderni che formano questo libro sono liberamente disponibili per la distribuzione e l'uso. Abbiamo lavorato duramente per abbassare le barriere di accesso a tutti per imparare il deep learning e speriamo che i nostri lettori ne traggano beneficio.
+
+
+
+## Riassunto
+
+* L'apprendimento automatico studia come i sistemi informatici possono sfruttare l'esperienza (spesso i dati) per migliorare le prestazioni in compiti specifici. Combina idee dalla statistica, dal data mining e dall'ottimizzazione. Spesso, è usato come un mezzo per implementare soluzioni AI.
+* Come classe di apprendimento automatico, l'apprendimento rappresentazionale si concentra su come trovare automaticamente il modo appropriato per rappresentare i dati. L'apprendimento profondo è un apprendimento di rappresentazione a più livelli attraverso l'apprendimento di molti strati di trasformazioni.
+* L'apprendimento profondo sostituisce non solo i modelli superficiali alla fine delle tradizionali pipeline di apprendimento automatico, ma anche il processo ad alta intensità di lavoro dell'ingegneria delle caratteristiche. 
+* Gran parte dei recenti progressi nell'apprendimento profondo sono stati innescati da un'abbondanza di dati derivanti da sensori economici e applicazioni su scala Internet, e da progressi significativi nel calcolo, per lo più attraverso le GPU.
+* L'ottimizzazione dell'intero sistema è una componente chiave per ottenere alte prestazioni. La disponibilità di efficienti framework di deep learning ha reso la progettazione e l'implementazione di questo significativamente più facile.
+ Tradotto con www.DeepL.com/translator (versione gratuita)
+ 
+## Esercizi
+
+1. Quali parti di codice che state attualmente scrivendo potrebbero essere "apprese", cioè migliorate imparando e determinando automaticamente le scelte di design che vengono fatte nel vostro codice? Il vostro codice include scelte di design euristiche?
+1. Quali problemi che incontrate hanno molti esempi su come risolverli, ma nessun modo specifico per automatizzarli? Questi potrebbero essere i candidati principali per l'uso del deep learning.
+1. Considerando lo sviluppo dell'IA come una nuova rivoluzione industriale, qual è la relazione tra algoritmi e dati? È simile alle macchine a vapore e al carbone? Qual è la differenza fondamentale?
+1. Dove altro si può applicare l'approccio di formazione end-to-end, come in :numref:`fig_ml_loop`, fisica, ingegneria ed econometria?
 
 [Discussions](https://discuss.d2l.ai/t/22)
